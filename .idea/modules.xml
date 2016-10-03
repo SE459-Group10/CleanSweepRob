@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/CleanSweepRob.iml" filepath="$PROJECT_DIR$/.idea/CleanSweepRob.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cleansweep-model/cleansweep-model.iml" filepath="$PROJECT_DIR$/cleansweep-model/cleansweep-model.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cleansweep-service/cleansweep-service.iml" filepath="$PROJECT_DIR$/cleansweep-service/cleansweep-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cleansweep-ui/cleansweep-ui.iml" filepath="$PROJECT_DIR$/cleansweep-ui/cleansweep-ui.iml" />
+    </modules>
+  </component>
+</project>
