@@ -11,4 +11,12 @@
 
     <artifactId>cleansweep-ui</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>edu.depaul.cdm.se459</groupId>
+            <artifactId>cleansweep-model</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+
 </project>
