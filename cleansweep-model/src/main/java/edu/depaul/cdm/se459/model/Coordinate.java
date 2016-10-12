@@ -1,4 +1,4 @@
-package edu.depaul.cdm.se459.model;
+package example;
 
 /**
  * Created by Suqing on 10/3/16.
