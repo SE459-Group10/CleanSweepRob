@@ -1,6 +1,5 @@
 package edu.depaul.cdm.se459.ui;
 
-import com.sun.xml.internal.bind.v2.runtime.Coordinator;
 import edu.depaul.cdm.se459.model.Coordinate;
 
 import javax.swing.*;
