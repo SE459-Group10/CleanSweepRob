@@ -3,8 +3,6 @@ package edu.depaul.cdm.se459.ui;
 import edu.depaul.cdm.se459.model.Coordinate;
 
 import javax.swing.*;
-import javax.xml.bind.ValidationEvent;
-import javax.xml.bind.ValidationEventLocator;
 import java.awt.*;
 import java.io.File;
 import java.io.FileNotFoundException;
