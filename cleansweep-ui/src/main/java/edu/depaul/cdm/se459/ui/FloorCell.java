@@ -18,11 +18,10 @@ public class FloorCell extends Cell {
     private int floorType;
     private Coordinate coordinate;
     private Color backgroundColor;
+    private int dirtAmount;
     private final static Color BARE_FLOOR_COLOR = Color.LIGHT_GRAY;
     private final static Color LOW_PILE_COLOR = Color.GRAY;
     private final static Color HIGH_PILE_COLOR = Color.DARK_GRAY;
-    private final static Color OPEN_DOOR_COLOR = Color.CYAN;
-    private final static Color STAIRS_COLOR = Color.RED;
     private final static Color CHARGING_STATION_COLOR = Color.GREEN;
 
     public FloorCell(Coordinate coordinate, int floorType) {
@@ -30,7 +29,6 @@ public class FloorCell extends Cell {
         super();
         this.coordinate = coordinate;
         this.floorType = floorType;
-        this.setOpaque(true);
         switch (floorType) {
             case 1:
                 this.setBackground(BARE_FLOOR_COLOR);
@@ -40,21 +38,6 @@ public class FloorCell extends Cell {
                 break;
             case 3:
                 this.setBackground(HIGH_PILE_COLOR);
-                break;
-            case 4:
-                this.setBackground(OPEN_DOOR_COLOR);
-//                this.setText("Door");
-//                this.setHorizontalAlignment(CENTER);
-                break;
-            case 5:
-                this.setBackground(STAIRS_COLOR);
-//                this.setText("Stair");
-//                this.setHorizontalAlignment(CENTER);
-                break;
-            case 6:
-                this.setBackground(CHARGING_STATION_COLOR);
-//                this.setText("Station");
-//                this.setHorizontalAlignment(CENTER);
                 break;
             default:
                 this.setBackground(Color.WHITE);
@@ -77,5 +60,19 @@ public class FloorCell extends Cell {
 
     public void setCoordinate(Coordinate coordinate) {
         this.coordinate = coordinate;
+    }
+
+    public int getDirtAmount() {
+        return dirtAmount;
+    }
+
+    public void setDirtAmount(int dirtAmount) {
+        this.dirtAmount = dirtAmount;
+    }
+
+    @Override
+    public void setText(String text) {
+        super.setText(text);
+        this.setHorizontalAlignment(CENTER);
     }
 }

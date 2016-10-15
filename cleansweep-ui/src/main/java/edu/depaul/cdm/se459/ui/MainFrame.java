@@ -6,6 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.Random;
 import java.util.Scanner;
 
 /**
@@ -16,6 +17,7 @@ public class MainFrame extends JFrame {
     private static final int WINDOW_WIDTH = 800;
     private static final int WINDOW_HEIGHT = 800;
     private static final String APP_NAME = "Clean Sweep Machine";
+    private Cell[][] cells;
 
     public MainFrame() {
         super(APP_NAME);
@@ -49,16 +51,47 @@ public class MainFrame extends JFrame {
             JPanel panel = new JPanel();
             panel.setLayout(new GridLayout(rows, cols));
 
-            while(s.hasNextInt()) {
-                int i = s.nextInt();
-                // 0: wall
-                // else: any other type of floor
-                switch (i) {
-                    case 0: panel.add(new WallCell(new Coordinate(0, 0)));
-                        break;
-                    default: panel.add(new FloorCell(new Coordinate(0, 0), i));
+            cells = new Cell[cols][rows];
+
+            for(int i = 0; i < cols; i++) {
+                for (int j = 0; j < rows; j++) {
+                    if (s.hasNextInt()) {
+                        int num = s.nextInt();
+                        switch (num) {
+                            case 0:
+                                WallCell wallCell = new WallCell(new Coordinate(i, j));
+                                cells[i][j] = wallCell;
+                                panel.add(wallCell);
+                                break;
+                            case 4:
+                                DoorCell doorCell = new DoorCell(new Coordinate(i, j), true);
+                                cells[i][j] = doorCell;
+                                panel.add(doorCell);
+                                break;
+                            case 5:
+                                StairCell stairCell = new StairCell(new Coordinate(i, j));
+                                cells[i][j] = stairCell;
+                                panel.add(stairCell);
+                                break;
+                            case 6:
+                                StationCell stationCell = new StationCell(new Coordinate(i, j));
+                                cells[i][j] = stationCell;
+                                panel.add(stationCell);
+                                break;
+                            default:
+                                FloorCell floorCell = new FloorCell(new Coordinate(i, j), num);
+                                Random generator = new Random();
+                                int randomDirtAmount = generator.nextInt(10);          // give a random dirt amount from 0 to 9
+                                floorCell.setDirtAmount(randomDirtAmount);
+                                System.out.println(floorCell.getDirtAmount());
+                                floorCell.setText(randomDirtAmount+"");
+                                cells[i][j] = floorCell;
+                                panel.add(floorCell);
+                        }
+                    }
                 }
             }
+
             add(panel, BorderLayout.CENTER);
 
             // add info panel about views
@@ -70,6 +103,14 @@ public class MainFrame extends JFrame {
                 s.close();
             }
         }
+    }
+
+    public Cell[][] getCells() {
+        return cells;
+    }
+
+    public void setCells(Cell[][] cells) {
+        this.cells = cells;
     }
 
     private void addInfoPanel() {
@@ -99,17 +140,17 @@ public class MainFrame extends JFrame {
         highPileFloorLabel.setHorizontalAlignment(SwingConstants.CENTER);
         panel.add(highPileFloorLabel);
 
-        JLabel openDoorLabel = new FloorCell(new Coordinate(0, 0), 4);
+        JLabel openDoorLabel = new DoorCell(new Coordinate(0, 0), true);
         openDoorLabel.setText("Open Door");
         openDoorLabel.setHorizontalAlignment(SwingConstants.CENTER);
         panel.add(openDoorLabel);
 
-        JLabel stairLabel = new FloorCell(new Coordinate(0, 0), 5);
+        JLabel stairLabel = new StairCell(new Coordinate(0, 0));
         stairLabel.setText("Stair");
         stairLabel.setHorizontalAlignment(SwingConstants.CENTER);
         panel.add(stairLabel);
 
-        JLabel chargingStationLabel = new FloorCell(new Coordinate(0, 0), 6);
+        JLabel chargingStationLabel = new StationCell(new Coordinate(0, 0));
         chargingStationLabel.setText("Charging Station");
         chargingStationLabel.setHorizontalAlignment(SwingConstants.CENTER);
         panel.add(chargingStationLabel);

@@ -24,7 +24,7 @@ public class AppMain {
 
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                new MainFrame();
+                MainFrame main = new MainFrame();
             }
         });
     }
