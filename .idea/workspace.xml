@@ -2,18 +2,14 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2110e1ef-388b-4a47-8703-b426a111c8db" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cleansweep-model/src/main/java/edu/depaul/cdm/se459/model/Utility.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cleansweep-ui/src/main/java/edu/depaul/cdm/se459/ui/SweepMachine.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__junit_junit_4_12.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/Maven__org_hamcrest_hamcrest_core_1_3.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/CleanSweepRob.iml" afterPath="$PROJECT_DIR$/.idea/CleanSweepRob.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cleansweep-model/src/main/java/edu/depaul/cdm/se459/model/Coordinate.java" afterPath="$PROJECT_DIR$/cleansweep-model/src/main/java/edu/depaul/cdm/se459/model/Coordinate.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cleansweep-service/src/main/java/edu/depaul/cdm/se459/service/AppMain.java" afterPath="$PROJECT_DIR$/cleansweep-service/src/main/java/edu/depaul/cdm/se459/service/AppMain.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cleansweep-ui/src/main/java/edu/depaul/cdm/se459/ui/Cell.java" afterPath="$PROJECT_DIR$/cleansweep-ui/src/main/java/edu/depaul/cdm/se459/ui/Cell.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cleansweep-ui/src/main/java/edu/depaul/cdm/se459/ui/DoorCell.java" afterPath="$PROJECT_DIR$/cleansweep-ui/src/main/java/edu/depaul/cdm/se459/ui/DoorCell.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cleansweep-ui/src/main/java/edu/depaul/cdm/se459/ui/FloorCell.java" afterPath="$PROJECT_DIR$/cleansweep-ui/src/main/java/edu/depaul/cdm/se459/ui/FloorCell.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cleansweep-ui/src/main/java/edu/depaul/cdm/se459/ui/MainFrame.java" afterPath="$PROJECT_DIR$/cleansweep-ui/src/main/java/edu/depaul/cdm/se459/ui/MainFrame.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cleansweep-ui/src/main/java/edu/depaul/cdm/se459/ui/StairCell.java" afterPath="$PROJECT_DIR$/cleansweep-ui/src/main/java/edu/depaul/cdm/se459/ui/StairCell.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cleansweep-ui/src/main/java/edu/depaul/cdm/se459/ui/StationCell.java" afterPath="$PROJECT_DIR$/cleansweep-ui/src/main/java/edu/depaul/cdm/se459/ui/StationCell.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cleansweep-ui/src/main/java/edu/depaul/cdm/se459/ui/WallCell.java" afterPath="$PROJECT_DIR$/cleansweep-ui/src/main/java/edu/depaul/cdm/se459/ui/WallCell.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cleansweep-model/cleansweep-model.iml" afterPath="$PROJECT_DIR$/cleansweep-model/cleansweep-model.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cleansweep-service/cleansweep-service.iml" afterPath="$PROJECT_DIR$/cleansweep-service/cleansweep-service.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cleansweep-ui/cleansweep-ui.iml" afterPath="$PROJECT_DIR$/cleansweep-ui/cleansweep-ui.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
     </list>
     <ignored path="CleanSweepRob.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -66,15 +62,27 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SweepMachine.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="SweepMachine.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/cleansweep-ui/src/main/java/edu/depaul/cdm/se459/ui/SweepMachine.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="360">
-              <caret line="45" column="20" selection-start-line="45" selection-start-column="20" selection-end-line="45" selection-end-column="20" />
+            <state relative-caret-position="527">
+              <caret line="39" column="0" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#1138#1139#0" expanded="true" />
                 <element signature="e#1166#1167#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Floortest.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/cleansweep-ui/src/test/java/edu/depaul/cdm/se459/ui/Floortest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="330">
+              <caret line="22" column="34" selection-start-line="22" selection-start-column="34" selection-end-line="22" selection-end-column="34" />
+              <folding>
+                <element signature="imports" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -85,6 +93,16 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="345">
               <caret line="31" column="0" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pom.xml" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/pom.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="195">
+              <caret line="13" column="14" selection-start-line="13" selection-start-column="14" selection-end-line="13" selection-end-column="14" />
               <folding />
             </state>
           </provider>
@@ -125,7 +143,6 @@
       <list>
         <option value="$PROJECT_DIR$/cleansweep-service/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/edu/depaul/cdm/se459/app/AppMain.java" />
-        <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/cleansweep-ui/pom.xml" />
         <option value="$PROJECT_DIR$/cleansweep-ui/src/main/resources/file/floorplan.txt" />
@@ -142,6 +159,7 @@
         <option value="$PROJECT_DIR$/cleansweep-model/src/main/java/edu/depaul/cdm/se459/model/Coordinate.java" />
         <option value="$PROJECT_DIR$/cleansweep-ui/src/main/java/edu/depaul/cdm/se459/ui/MainFrame.java" />
         <option value="$PROJECT_DIR$/cleansweep-ui/src/main/java/edu/depaul/cdm/se459/ui/SweepMachine.java" />
+        <option value="$PROJECT_DIR$/pom.xml" />
       </list>
     </option>
   </component>
@@ -1049,12 +1067,12 @@
       <workItem from="1475536872609" duration="3606000" />
       <workItem from="1475729972235" duration="3827000" />
       <workItem from="1476324032543" duration="693000" />
-      <workItem from="1476480006817" duration="17880000" />
+      <workItem from="1476480006817" duration="18237000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="28835000" />
+    <option name="totallyTimeSpent" value="29192000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="756" y="23" width="1095" height="873" extended-state="0" />
@@ -1376,14 +1394,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="9" column="13" selection-start-line="9" selection-start-column="13" selection-end-line="9" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/cleansweep-ui/pom.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="270">
@@ -1524,13 +1534,31 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/cleansweep-ui/src/main/java/edu/depaul/cdm/se459/ui/SweepMachine.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="360">
-          <caret line="45" column="20" selection-start-line="45" selection-start-column="20" selection-end-line="45" selection-end-column="20" />
+        <state relative-caret-position="527">
+          <caret line="39" column="0" selection-start-line="39" selection-start-column="0" selection-end-line="39" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#1138#1139#0" expanded="true" />
             <element signature="e#1166#1167#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cleansweep-ui/src/test/java/edu/depaul/cdm/se459/ui/Floortest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="330">
+          <caret line="22" column="34" selection-start-line="22" selection-start-column="34" selection-end-line="22" selection-end-column="34" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="195">
+          <caret line="13" column="14" selection-start-line="13" selection-start-column="14" selection-end-line="13" selection-end-column="14" />
+          <folding />
         </state>
       </provider>
     </entry>
