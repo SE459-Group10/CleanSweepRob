@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -21,58 +22,35 @@ public class MainFrame extends JFrame {
     private Cell[][] cells;
     private StationCell startStationCell;
 
-    public MainFrame() {
+    public MainFrame(File file) throws IOException {
         super(APP_NAME);
-        constructAppWindow();
+        constructAppWindow(file);
     }
 
-    private void constructAppWindow() {
+    private void constructAppWindow(File file) throws IOException {
         setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);    // position not in top left corner, but in center of screen
-        processFloorPlan();
+        processFloorPlan(file);
         setVisible(true);
     }
 
-    private void processFloorPlan() {
+    private void processFloorPlan(File file) throws IOException {
         Scanner s = null;
         try {
-            ClassLoader classLoader = getClass().getClassLoader();
-            File file = new File(classLoader.getResource("file/floorplan.txt").getFile());
             s = new Scanner(file);
             int cols = 0;
             int rows = 0;
 
             if(s.hasNextInt()) {
                 cols = s.nextInt();
-            } else return;
+            } else throw new IOException("Not able to get number of columns from file");
             if(s.hasNextInt()) {
                 rows = s.nextInt();
-            } else return;
-
-//            JPanel overlay = new JPanel();
-//            overlay.setLayout(new OverlayLayout(overlay));
-//
-//            JPanel sweepMovePanel = new JPanel();
-//            sweepMovePanel.setLayout(new GridBagLayout());
-//            GridBagConstraints c = new GridBagConstraints();
-//            c.fill = GridBagConstraints.BOTH;
-//            c.gridx = 0;
-//            c.gridy = 14;
-//            // add sweep machine to sweepMovePanel
-//            JLabel label = new JLabel("Hello world!!!");
-//            label.setBackground(Color.PINK);
-//            label.setOpaque(true);
-//
-//
-//            sweepMovePanel.add(label, c);
-//            sweepMovePanel.setOpaque(true);
-//            overlay.add(sweepMovePanel, BorderLayout.CENTER);
+            } else throw new IOException("Not able to get number of rows from file");
 
             JPanel panel = new JPanel();
             panel.setLayout(new GridLayout(0, cols));
-            GridLayout gridLayout = new GridLayout(rows, cols);
-
 
             cells = new Cell[rows][cols];
 
@@ -114,7 +92,7 @@ public class MainFrame extends JFrame {
                                 cells[i][j] = floorCell;
                                 panel.add(floorCell);
                         }
-                    }
+                    } else throw new IOException("File data is does not match rows and columns");
                 }
             }
 
@@ -124,8 +102,8 @@ public class MainFrame extends JFrame {
 
             // add info panel about views
             addInfoPanel();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+        } catch (IOException e) {
+            throw e;
         } finally {
             if(s != null) {
                 s.close();

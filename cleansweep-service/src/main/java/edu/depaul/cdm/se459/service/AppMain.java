@@ -6,6 +6,7 @@ import edu.depaul.cdm.se459.ui.StationCell;
 import edu.depaul.cdm.se459.ui.SweepMachine;
 
 import javax.swing.*;
+import java.io.File;
 
 /**
  * Created by Suqing on 10/2/16.
@@ -27,7 +28,9 @@ public class AppMain {
 
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                MainFrame main = new MainFrame();
+                ClassLoader classLoader = getClass().getClassLoader();
+                File file = new File(classLoader.getResource("file/floorplan.txt").getFile());
+                MainFrame main = new MainFrame(file);
                 Cell[][] cells = main.getCells();   // will return each cell elements
                 StationCell startStation = main.getStartStationCell();
                 SweepMachine sweepMachine = new SweepMachine(startStation, cells,
