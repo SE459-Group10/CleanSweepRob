@@ -1,6 +1,7 @@
 package edu.depaul.cdm.se459.ui;
 
 import edu.depaul.cdm.se459.model.Coordinate;
+import edu.depaul.cdm.se459.model.Utility;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,6 +19,7 @@ public class MainFrame extends JFrame {
     private static final int WINDOW_HEIGHT = 800;
     private static final String APP_NAME = "Clean Sweep Machine";
     private Cell[][] cells;
+    private StationCell startStationCell;
 
     public MainFrame() {
         super(APP_NAME);
@@ -48,13 +50,34 @@ public class MainFrame extends JFrame {
                 rows = s.nextInt();
             } else return;
 
+//            JPanel overlay = new JPanel();
+//            overlay.setLayout(new OverlayLayout(overlay));
+//
+//            JPanel sweepMovePanel = new JPanel();
+//            sweepMovePanel.setLayout(new GridBagLayout());
+//            GridBagConstraints c = new GridBagConstraints();
+//            c.fill = GridBagConstraints.BOTH;
+//            c.gridx = 0;
+//            c.gridy = 14;
+//            // add sweep machine to sweepMovePanel
+//            JLabel label = new JLabel("Hello world!!!");
+//            label.setBackground(Color.PINK);
+//            label.setOpaque(true);
+//
+//
+//            sweepMovePanel.add(label, c);
+//            sweepMovePanel.setOpaque(true);
+//            overlay.add(sweepMovePanel, BorderLayout.CENTER);
+
             JPanel panel = new JPanel();
-            panel.setLayout(new GridLayout(rows, cols));
+            panel.setLayout(new GridLayout(0, cols));
+            GridLayout gridLayout = new GridLayout(rows, cols);
 
-            cells = new Cell[cols][rows];
 
-            for(int i = 0; i < cols; i++) {
-                for (int j = 0; j < rows; j++) {
+            cells = new Cell[rows][cols];
+
+            for(int i = 0; i < rows; i++) {
+                for (int j = 0; j < cols; j++) {
                     if (s.hasNextInt()) {
                         int num = s.nextInt();
                         switch (num) {
@@ -76,6 +99,10 @@ public class MainFrame extends JFrame {
                             case 6:
                                 StationCell stationCell = new StationCell(new Coordinate(i, j));
                                 cells[i][j] = stationCell;
+                                if(startStationCell == null) {
+                                    // initialize the start station cell of the floor plan
+                                    startStationCell = stationCell;
+                                }
                                 panel.add(stationCell);
                                 break;
                             default:
@@ -83,7 +110,6 @@ public class MainFrame extends JFrame {
                                 Random generator = new Random();
                                 int randomDirtAmount = generator.nextInt(10);          // give a random dirt amount from 0 to 9
                                 floorCell.setDirtAmount(randomDirtAmount);
-                                System.out.println(floorCell.getDirtAmount());
                                 floorCell.setText(randomDirtAmount+"");
                                 cells[i][j] = floorCell;
                                 panel.add(floorCell);
@@ -93,6 +119,8 @@ public class MainFrame extends JFrame {
             }
 
             add(panel, BorderLayout.CENTER);
+
+//            add(overlay, BorderLayout.CENTER);
 
             // add info panel about views
             addInfoPanel();
@@ -113,15 +141,37 @@ public class MainFrame extends JFrame {
         this.cells = cells;
     }
 
+    public int getFloorLayoutColumns() {
+        return cells.length;
+    }
+
+    public int getFloorLayoutRows() {
+        return cells[0].length;
+    }
+
+    public StationCell getStartStationCell() {
+        return startStationCell;
+    }
+
+    public void setStartStationCell(StationCell startStationCell) {
+        this.startStationCell = startStationCell;
+    }
+
     private void addInfoPanel() {
         JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(0, 7));
+        panel.setLayout(new GridLayout(0, 8));
+
+        JLabel label = new JLabel("Sweep Machine");
+        label.setHorizontalAlignment(SwingConstants.CENTER);
+        label.setOpaque(true);
+        label.setBackground(Utility.SWEEP_MACHINE_COLOR);
+        panel.add(label);
 
         // wall label
         JLabel wallLabel = new JLabel("Wall");
         wallLabel.setHorizontalAlignment(SwingConstants.CENTER);
         wallLabel.setOpaque(true);
-        wallLabel.setBackground(Color.BLACK);
+        wallLabel.setBackground(Utility.WALL_COLOR);
         wallLabel.setForeground(Color.WHITE);
         panel.add(wallLabel);
 

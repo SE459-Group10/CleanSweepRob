@@ -1,6 +1,9 @@
 package edu.depaul.cdm.se459.service;
 
+import edu.depaul.cdm.se459.ui.Cell;
 import edu.depaul.cdm.se459.ui.MainFrame;
+import edu.depaul.cdm.se459.ui.StationCell;
+import edu.depaul.cdm.se459.ui.SweepMachine;
 
 import javax.swing.*;
 
@@ -25,8 +28,12 @@ public class AppMain {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 MainFrame main = new MainFrame();
+                Cell[][] cells = main.getCells();   // will return each cell elements
+                StationCell startStation = main.getStartStationCell();
+                SweepMachine sweepMachine = new SweepMachine(startStation, cells,
+                        main.getFloorLayoutRows(), main.getFloorLayoutColumns());
+                sweepMachine.detectSurrounding();
             }
         });
     }
-
 }

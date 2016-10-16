@@ -1,6 +1,7 @@
 package edu.depaul.cdm.se459.ui;
 
 import edu.depaul.cdm.se459.model.Coordinate;
+import edu.depaul.cdm.se459.model.Utility;
 
 import java.awt.*;
 
@@ -17,12 +18,7 @@ public class FloorCell extends Cell {
      */
     private int floorType;
     private Coordinate coordinate;
-    private Color backgroundColor;
     private int dirtAmount;
-    private final static Color BARE_FLOOR_COLOR = Color.LIGHT_GRAY;
-    private final static Color LOW_PILE_COLOR = Color.GRAY;
-    private final static Color HIGH_PILE_COLOR = Color.DARK_GRAY;
-    private final static Color CHARGING_STATION_COLOR = Color.GREEN;
 
     public FloorCell(Coordinate coordinate, int floorType) {
 //        super(Color.WHITE, coordinate);
@@ -31,13 +27,13 @@ public class FloorCell extends Cell {
         this.floorType = floorType;
         switch (floorType) {
             case 1:
-                this.setBackground(BARE_FLOOR_COLOR);
+                this.setBackground(Utility.BARE_FLOOR_COLOR);
                 break;
             case 2:
-                this.setBackground(LOW_PILE_COLOR);
+                this.setBackground(Utility.LOW_PILE_COLOR);
                 break;
             case 3:
-                this.setBackground(HIGH_PILE_COLOR);
+                this.setBackground(Utility.HIGH_PILE_COLOR);
                 break;
             default:
                 this.setBackground(Color.WHITE);
