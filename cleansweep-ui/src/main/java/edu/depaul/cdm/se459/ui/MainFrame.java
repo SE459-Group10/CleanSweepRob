@@ -1,11 +1,13 @@
 package edu.depaul.cdm.se459.ui;
 
 import edu.depaul.cdm.se459.model.Coordinate;
+import edu.depaul.cdm.se459.model.Utility;
 
 import javax.swing.*;
 import java.awt.*;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -18,43 +20,42 @@ public class MainFrame extends JFrame {
     private static final int WINDOW_HEIGHT = 800;
     private static final String APP_NAME = "Clean Sweep Machine";
     private Cell[][] cells;
+    private StationCell startStationCell;
 
-    public MainFrame() {
+    public MainFrame(File file) throws IOException {
         super(APP_NAME);
-        constructAppWindow();
+        constructAppWindow(file);
     }
 
-    private void constructAppWindow() {
+    private void constructAppWindow(File file) throws IOException {
         setSize(WINDOW_WIDTH, WINDOW_HEIGHT);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);    // position not in top left corner, but in center of screen
-        processFloorPlan();
+        processFloorPlan(file);
         setVisible(true);
     }
 
-    private void processFloorPlan() {
+    private void processFloorPlan(File file) throws IOException {
         Scanner s = null;
         try {
-            ClassLoader classLoader = getClass().getClassLoader();
-            File file = new File(classLoader.getResource("file/floorplan.txt").getFile());
             s = new Scanner(file);
             int cols = 0;
             int rows = 0;
 
             if(s.hasNextInt()) {
                 cols = s.nextInt();
-            } else return;
+            } else throw new IOException("Not able to get number of columns from file");
             if(s.hasNextInt()) {
                 rows = s.nextInt();
-            } else return;
+            } else throw new IOException("Not able to get number of rows from file");
 
             JPanel panel = new JPanel();
-            panel.setLayout(new GridLayout(rows, cols));
+            panel.setLayout(new GridLayout(0, cols));
 
-            cells = new Cell[cols][rows];
+            cells = new Cell[rows][cols];
 
-            for(int i = 0; i < cols; i++) {
-                for (int j = 0; j < rows; j++) {
+            for(int i = 0; i < rows; i++) {
+                for (int j = 0; j < cols; j++) {
                     if (s.hasNextInt()) {
                         int num = s.nextInt();
                         switch (num) {
@@ -76,6 +77,10 @@ public class MainFrame extends JFrame {
                             case 6:
                                 StationCell stationCell = new StationCell(new Coordinate(i, j));
                                 cells[i][j] = stationCell;
+                                if(startStationCell == null) {
+                                    // initialize the start station cell of the floor plan
+                                    startStationCell = stationCell;
+                                }
                                 panel.add(stationCell);
                                 break;
                             default:
@@ -83,21 +88,22 @@ public class MainFrame extends JFrame {
                                 Random generator = new Random();
                                 int randomDirtAmount = generator.nextInt(10);          // give a random dirt amount from 0 to 9
                                 floorCell.setDirtAmount(randomDirtAmount);
-                                System.out.println(floorCell.getDirtAmount());
                                 floorCell.setText(randomDirtAmount+"");
                                 cells[i][j] = floorCell;
                                 panel.add(floorCell);
                         }
-                    }
+                    } else throw new IOException("File data is does not match rows and columns");
                 }
             }
 
             add(panel, BorderLayout.CENTER);
 
+//            add(overlay, BorderLayout.CENTER);
+
             // add info panel about views
             addInfoPanel();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
+        } catch (IOException e) {
+            throw e;
         } finally {
             if(s != null) {
                 s.close();
@@ -113,15 +119,37 @@ public class MainFrame extends JFrame {
         this.cells = cells;
     }
 
+    public int getFloorLayoutColumns() {
+        return cells.length;
+    }
+
+    public int getFloorLayoutRows() {
+        return cells[0].length;
+    }
+
+    public StationCell getStartStationCell() {
+        return startStationCell;
+    }
+
+    public void setStartStationCell(StationCell startStationCell) {
+        this.startStationCell = startStationCell;
+    }
+
     private void addInfoPanel() {
         JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(0, 7));
+        panel.setLayout(new GridLayout(0, 8));
+
+        JLabel label = new JLabel("Sweep Machine");
+        label.setHorizontalAlignment(SwingConstants.CENTER);
+        label.setOpaque(true);
+        label.setBackground(Utility.SWEEP_MACHINE_COLOR);
+        panel.add(label);
 
         // wall label
         JLabel wallLabel = new JLabel("Wall");
         wallLabel.setHorizontalAlignment(SwingConstants.CENTER);
         wallLabel.setOpaque(true);
-        wallLabel.setBackground(Color.BLACK);
+        wallLabel.setBackground(Utility.WALL_COLOR);
         wallLabel.setForeground(Color.WHITE);
         panel.add(wallLabel);
 
