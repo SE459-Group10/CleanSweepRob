@@ -79,4 +79,59 @@ public class SweepMachine {
 		// nextCell.setBackground(Utility.SWEEP_MACHINE_COLOR);
 		// return null;
 	}
+	
+	
+//	/**
+//	 * Sets if the Cell is an object or not 0 Wall, 1 to 3 floors 4 and up
+//	 * obstacles
+//	 * 
+//	 * @param obstacle
+//	 */
+//	public boolean IsObstacle(Cell obstacle) {
+//		obstacle = layoutCells[currentPositionCoordinate.getY() - 1][currentPositionCoordinate.getX()];
+//		if (obstacle > 3 || obstacle < 0) { // need the position of the cell?
+//			return true;
+//		}
+//		return false;
+//	}
+//
+//	// TODO: Sweep Machine surrounding object detection based on
+//	// currentPositionCoordinate
+//	// TODO: should return null if there is no movable surrounding cell
+//	public Cell detectSurrounding(Direction obstacleDirection) {
+//		// TODO: this is just a sample way to access current cell's
+//		// surroundings, and check its instance
+//		// if its object or not, could be a boolean
+//		// could be if obstacle >4 or obstacle <0
+//		if (obstacleDirection == Direction.North) {
+//			Cell NorthCell = layoutCells[currentPositionCoordinate.getY() - 1][currentPositionCoordinate.getX()];
+//			if (IsObstacle(NorthCell)==true) {// if its true as object
+//				nextCell = null;
+//			} else {
+//				nextCell = NorthCell;
+//			}
+//		} else if (obstacleDirection == Direction.South) {
+//			Cell nextCellSouth = layoutCells[currentPositionCoordinate.getY() + 1][currentPositionCoordinate.getX()];
+//			if (nextCellSouth.equals(obstacle)) {
+//				nextCell = null;
+//			} else {
+//				nextCell = nextCellSouth;
+//			}
+//		} else if (obstacleDirection == Direction.West) {
+//			Cell nextCellWest = layoutCells[currentPositionCoordinate.getY()][currentPositionCoordinate.getX() - 1];
+//			if (nextCellWest.equals(obstacle)) {
+//				nextCell = null;
+//			} else {
+//				nextCell = nextCellWest;
+//			}
+//		} else if (obstacleDirection == Direction.East) {
+//			Cell nextCellEast = layoutCells[currentPositionCoordinate.getY()][currentPositionCoordinate.getX() + 1];
+//			if (nextCellEast.equals(obstacle)) {
+//				nextCell = null;
+//			} else {
+//				nextCell = nextCellEast;
+//			}
+//		}
+//		return nextCell;
+	
 }
