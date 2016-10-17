@@ -8,6 +8,11 @@ import java.awt.*;
 /**
  * Created by Suqing on 10/3/16.
  */
+
+
+/**
+ * A Cell class that contains the color and the coordinate of each cell
+ */
 public class Cell extends JLabel {
 
     private Coordinate coordinate;

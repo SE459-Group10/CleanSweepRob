@@ -5,6 +5,10 @@ import java.awt.*;
 /**
  * Created by Suqing on 10/15/16.
  */
+
+/**
+ * A class Cell that contains the different colors of each element in the floor layout
+ */
 public class Utility {
 
     public static final Color SWEEP_MACHINE_COLOR = Color.WHITE;

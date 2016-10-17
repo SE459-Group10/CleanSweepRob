@@ -14,6 +14,13 @@ import java.util.Scanner;
 /**
  * Created by Suqing on 10/2/16.
  */
+
+/**
+ * A class for graphics for the Floor Plan
+ * It reads the file that is located in the resources and gives the number of col/row which created our cell
+ * depending on the kind of cell we add it to the panel
+ * each cell has some dirt amount which is random
+ */
 public class MainFrame extends JFrame {
 
     private static final int WINDOW_WIDTH = 800;

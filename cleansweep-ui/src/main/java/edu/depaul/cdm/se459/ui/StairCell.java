@@ -8,15 +8,20 @@ import java.awt.*;
 /**
  * Created by Suqing on 10/14/16.
  */
+
+/**
+ * A subclass of the class Cell that contains the coordinates of Stairs and their color
+  */
 public class StairCell extends Cell {
 
     private Coordinate coordinate;
 
     public StairCell(Coordinate coordinate) {
-        super();
-        this.coordinate = coordinate;
-        this.setOpaque(true);
-        this.setBackground(Utility.STAIRS_COLOR);
+//        super();
+//        this.coordinate = coordinate;
+//        this.setOpaque(true);
+//        this.setBackground(Utility.STAIRS_COLOR);
+        super(Utility.STAIRS_COLOR, coordinate);
     }
 
 }

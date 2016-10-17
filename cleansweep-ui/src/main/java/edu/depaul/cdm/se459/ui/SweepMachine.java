@@ -8,9 +8,14 @@ import java.awt.*;
 /**
  * Created by Suqing on 10/15/16.
  */
+
+/**
+ * A  class for the vacuum cleaner that determines the current position of the machine,
+ *  depending on the class Cell coordinate. Also detects the surrounding objects 
+ */
 public class SweepMachine {
 
-    private Cell currentPositionCell;
+    private Cell currentPositionCell;//home Cell
     //  Cell[rows][cols]
     private Cell[][] layoutCells;
     private Coordinate currentPositionCoordinate;
@@ -24,13 +29,23 @@ public class SweepMachine {
         this.layoutCols = layoutCols;
         this.currentPositionCoordinate = currentPositionCell.getCoordinate();
         currentPositionCell.setBackground(Utility.SWEEP_MACHINE_COLOR);
+        
+        //add visited and not visited cells 
+        //battery life
     }
 
     // TODO: Sweep Machine movements based on currentPositionCoordinate
     // TODO: need to call detectSurrounding() to get the destination cell to move
     // TODO: detectSurrounding() will return null if there is no movable cell, then should return false
     public boolean move() {
-        return false;
+    	
+    	Cell destinationCell= detectSurrounding();
+    	if(destinationCell.equals(null)){
+    		return false;
+    	}
+    	else{
+        return true;
+    	}
     }
 
 

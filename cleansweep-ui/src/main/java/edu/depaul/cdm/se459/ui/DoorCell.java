@@ -8,6 +8,11 @@ import java.awt.*;
 /**
  * Created by Suqing on 10/14/16.
  */
+
+/**
+ * A subclass of the class Cell that contains the coordinates of a door existence
+ * and if a door is open or closed and the door color 
+ */
 public class DoorCell extends Cell {
 
     private boolean isOpen;
@@ -19,6 +24,7 @@ public class DoorCell extends Cell {
         this.coordinate = coordinate;
         this.setOpaque(true);
         this.setBackground(Utility.OPEN_DOOR_COLOR);
+      //  super(Utility.OPEN_DOOR_COLOR, coordinate);
     }
 
     public boolean isOpen() {

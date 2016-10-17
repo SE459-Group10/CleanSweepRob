@@ -7,6 +7,7 @@ import edu.depaul.cdm.se459.ui.SweepMachine;
 
 import javax.swing.*;
 import java.io.File;
+import java.io.IOException;
 
 /**
  * Created by Suqing on 10/2/16.
@@ -30,7 +31,12 @@ public class AppMain {
             public void run() {
                 ClassLoader classLoader = getClass().getClassLoader();
                 File file = new File(classLoader.getResource("file/floorplan.txt").getFile());
-                MainFrame main = new MainFrame(file);
+                MainFrame main = null;
+				try {
+					main = new MainFrame(file);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
                 Cell[][] cells = main.getCells();   // will return each cell elements
                 StationCell startStation = main.getStartStationCell();
                 SweepMachine sweepMachine = new SweepMachine(startStation, cells,

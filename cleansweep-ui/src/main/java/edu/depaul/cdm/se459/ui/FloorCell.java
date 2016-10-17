@@ -8,6 +8,12 @@ import java.awt.*;
 /**
  * Created by Suqing on 10/3/16.
  */
+
+/**
+ * A subclass of the class Cell that contains the coordinates of the cell and its floor type
+ * depending on the floor type the color is changing
+ * the cell can be dirt or clean
+ */
 public class FloorCell extends Cell {
 
     /*

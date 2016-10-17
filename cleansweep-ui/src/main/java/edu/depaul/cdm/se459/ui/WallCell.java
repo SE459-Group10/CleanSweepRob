@@ -8,6 +8,10 @@ import java.awt.*;
 /**
  * Created by Suqing on 10/3/16.
  */
+
+/**
+ * A subclass of the class Cell that contains the coordinates of Walls and their color
+  */
 public class WallCell extends Cell {
 
     public WallCell(Coordinate coordinate) {
