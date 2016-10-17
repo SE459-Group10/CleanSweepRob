@@ -20,23 +20,27 @@ public class FloorCell extends Cell {
 	 * floorType: 1: bare floor 2: low pile 3: high pile
 	 */
 	private int floorType;
-	private Coordinate coordinate;
 	private int dirtAmount;
+	private boolean isVisited;
 
 	public FloorCell(Coordinate coordinate, int floorType) {
 		// super(Color.WHITE, coordinate);
 		super();
-		this.coordinate = coordinate;
+		super.setCoordinate(coordinate);
 		this.floorType = floorType;
+		this.isVisited = false;		// init FloorCell to not visited at first
 		switch (floorType) {
 		case 1:
 			this.setBackground(Utility.BARE_FLOOR_COLOR);
+			super.setBackgroundColor(Utility.BARE_FLOOR_COLOR);
 			break;
 		case 2:
 			this.setBackground(Utility.LOW_PILE_COLOR);
+			super.setBackgroundColor(Utility.LOW_PILE_COLOR);
 			break;
 		case 3:
 			this.setBackground(Utility.HIGH_PILE_COLOR);
+			super.setBackgroundColor(Utility.HIGH_PILE_COLOR);
 			break;
 		default:
 			this.setBackground(Color.WHITE);
@@ -59,6 +63,14 @@ public class FloorCell extends Cell {
 
 	public void setDirtAmount(int dirtAmount) {
 		this.dirtAmount = dirtAmount;
+	}
+
+	public boolean isVisited() {
+		return isVisited;
+	}
+
+	public void setVisited(boolean visited) {
+		isVisited = visited;
 	}
 
 	@Override

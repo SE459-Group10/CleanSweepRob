@@ -27,6 +27,10 @@ public class Cell extends JLabel {
 		this.setBackground(color);
 	}
 
+	public Cell(Coordinate coordinate) {
+		this.coordinate = coordinate;
+	}
+
 	public Coordinate getCoordinate() {
 		return coordinate;
 	}
