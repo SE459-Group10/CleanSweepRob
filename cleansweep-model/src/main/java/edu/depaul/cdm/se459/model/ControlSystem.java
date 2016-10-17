@@ -73,8 +73,8 @@ public class ControlSystem {
     //Remove Dirt Method
 
     public void removeDirt(int dirtAmount){
-
-
+        int remainingCapacity = getDirtCapacity() - dirtAmount;
+        setDirtCapacity(remainingCapacity);
     }
 
 
