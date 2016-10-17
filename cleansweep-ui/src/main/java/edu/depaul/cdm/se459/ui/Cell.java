@@ -43,4 +43,5 @@ public class Cell extends JLabel {
 	public void setBackgroundColor(Color backgroundColor) {
 		this.backgroundColor = backgroundColor;
 	}
+	
 }
