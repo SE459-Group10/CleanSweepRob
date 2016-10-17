@@ -10,12 +10,13 @@ import java.awt.*;
  */
 
 /**
- * A subclass of the class Cell that contains the coordinates of Walls and their color
-  */
+ * A subclass of the class Cell that contains the coordinates of Walls and their
+ * color
+ */
 public class WallCell extends Cell {
 
-    public WallCell(Coordinate coordinate) {
-        super(Utility.WALL_COLOR, coordinate);
-    }
+	public WallCell(Coordinate coordinate) {
+		super(Utility.WALL_COLOR, coordinate);
+	}
 
 }

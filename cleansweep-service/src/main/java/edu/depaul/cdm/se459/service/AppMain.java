@@ -1,6 +1,7 @@
 package edu.depaul.cdm.se459.service;
 
 import edu.depaul.cdm.se459.ui.Cell;
+import edu.depaul.cdm.se459.ui.Direction;
 import edu.depaul.cdm.se459.ui.MainFrame;
 import edu.depaul.cdm.se459.ui.StationCell;
 import edu.depaul.cdm.se459.ui.SweepMachine;
@@ -41,7 +42,7 @@ public class AppMain {
                 StationCell startStation = main.getStartStationCell();
                 SweepMachine sweepMachine = new SweepMachine(startStation, cells,
                         main.getFloorLayoutRows(), main.getFloorLayoutColumns());
-                sweepMachine.detectSurrounding();
+                sweepMachine.detectSurrounding(Direction.North);
             }
         });
     }

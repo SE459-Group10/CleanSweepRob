@@ -10,36 +10,24 @@ import java.awt.*;
  */
 
 /**
- * A subclass of the class Cell that contains the coordinates of a door existence
- * and if a door is open or closed and the door color 
+ * A subclass of the class Cell that contains the coordinates of a door
+ * existence and if a door is open or closed and the door color
  */
 public class DoorCell extends Cell {
 
-    private boolean isOpen;
-    private Coordinate coordinate;
+	private boolean isOpen;
+	private Coordinate coordinate;
 
-    public DoorCell(Coordinate coordinate, boolean isOpen) {
-        super();
-        this.isOpen = isOpen;
-        this.coordinate = coordinate;
-        this.setOpaque(true);
-        this.setBackground(Utility.OPEN_DOOR_COLOR);
-      //  super(Utility.OPEN_DOOR_COLOR, coordinate);
-    }
+	public DoorCell(Coordinate coordinate, boolean isOpen) {
+		super(Utility.OPEN_DOOR_COLOR, coordinate);
+	}
 
-    public boolean isOpen() {
-        return isOpen;
-    }
+	public boolean isOpen() {
+		return isOpen;
+	}
 
-    public void setOpen(boolean open) {
-        isOpen = open;
-    }
+	public void setOpen(boolean open) {
+		isOpen = open;
+	}
 
-    public Coordinate getCoordinate() {
-        return coordinate;
-    }
-
-    public void setCoordinate(Coordinate coordinate) {
-        this.coordinate = coordinate;
-    }
 }
