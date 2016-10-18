@@ -21,4 +21,6 @@ public class StairCell extends Cell {
 		super(Utility.STAIRS_COLOR, coordinate);
 	}
 
+
+
 }

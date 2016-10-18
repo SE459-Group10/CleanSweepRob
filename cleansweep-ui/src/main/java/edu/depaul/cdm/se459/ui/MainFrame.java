@@ -80,6 +80,7 @@ public class MainFrame extends JFrame {
                                 StairCell stairCell = new StairCell(new Coordinate(i, j));
                                 cells[i][j] = stairCell;
                                 panel.add(stairCell);
+
                                 break;
                             case 6:
                                 StationCell stationCell = new StationCell(new Coordinate(i, j));

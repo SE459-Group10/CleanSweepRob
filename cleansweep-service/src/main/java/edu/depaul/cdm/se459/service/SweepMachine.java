@@ -27,13 +27,15 @@ public class SweepMachine {
 	private Cell nextCell;
 	private Direction obstacleDirection;
 	private Color preColor;
+	private int dirtCapacity;
 
-	public SweepMachine(Cell currentPositionCell, Cell[][] layoutCells, int layoutCols, int layoutRows) {
+	public SweepMachine(Cell currentPositionCell, Cell[][] layoutCells, int layoutCols, int layoutRows, int dirtCapacity) {
 		this.currentPositionCell = currentPositionCell;
 		this.layoutCells = layoutCells;
 		this.layoutRows = layoutRows;
 		this.layoutCols = layoutCols;
 		this.preColor = currentPositionCell.getBackgroundColor();
+		this.dirtCapacity = dirtCapacity;
 		currentPositionCell.setBackground(Utility.SWEEP_MACHINE_COLOR);
 
 		// add visited and not visited cells
@@ -53,7 +55,39 @@ public class SweepMachine {
 			return false;
 		} else {				// there is an open path on on side
 			makeMovement(destinationCell);
+			if (detectDirt(destinationCell) == true){
+				removeDirt(destinationCell);
+			}
+
 			return true;
+		}
+	}
+
+	private boolean detectDirt(FloorCell currentCell){
+		int dirtAmount = currentCell.getDirtAmount();
+			if (dirtAmount > 0 ){
+			System.out.println(dirtAmount + " dirt present");
+				return true;
+			} else {
+				System.out.println("No dirt");
+			return false;
+			}
+	}
+
+
+	private void removeDirt(FloorCell currentCell){
+		if (dirtCapacity != 0 ) {
+			int dirtAmount = currentCell.getDirtAmount();
+			if (dirtAmount > 0) {
+				int newDirtAmount = dirtAmount - 1;
+				currentCell.setDirtAmount(newDirtAmount);
+				currentCell.setText(newDirtAmount + "");
+				System.out.println("Removing  1 dirt");
+				dirtCapacity = dirtCapacity - 1;
+				System.out.println("Capacity is now: " + dirtCapacity);
+			}
+		} else {
+			return;
 		}
 	}
 
