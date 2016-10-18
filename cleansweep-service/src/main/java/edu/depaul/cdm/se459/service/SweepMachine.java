@@ -57,12 +57,17 @@ public class SweepMachine {
 			makeMovement(destinationCell);
 			if (detectDirt(destinationCell) == true){
 				removeDirt(destinationCell);
+				if(capacityFullNotification() == true){
+					System.out.println("Movement stopped because of full capacity");
+					return false;
+				}
 			}
 
 			return true;
 		}
 	}
 
+	//detects dirt, takes in a Floor Cell, checks its dirtAmount and returns true or false if the cell is dirty.
 	private boolean detectDirt(FloorCell currentCell){
 		int dirtAmount = currentCell.getDirtAmount();
 			if (dirtAmount > 0 ){
@@ -76,19 +81,38 @@ public class SweepMachine {
 
 
 	private void removeDirt(FloorCell currentCell){
-		if (dirtCapacity != 0 ) {
+		if (dirtCapacity > 0 ) {
 			int dirtAmount = currentCell.getDirtAmount();
 			if (dirtAmount > 0) {
-				int newDirtAmount = dirtAmount - 1;
+				if (dirtCapacity < dirtAmount){
+					int remainingDirt = dirtAmount - dirtCapacity;
+					dirtCapacity = dirtCapacity - dirtCapacity;
+					System.out.println("Removing  "+ dirtCapacity +" dirt");
+					currentCell.setDirtAmount(remainingDirt);
+					currentCell.setText(remainingDirt + "");
+					System.out.println("Capacity is now: " + dirtCapacity);
+
+				} else {
+				int newDirtAmount = dirtAmount - dirtAmount;
 				currentCell.setDirtAmount(newDirtAmount);
 				currentCell.setText(newDirtAmount + "");
-				System.out.println("Removing  1 dirt");
-				dirtCapacity = dirtCapacity - 1;
-				System.out.println("Capacity is now: " + dirtCapacity);
+				System.out.println("Removing  "+ dirtAmount +" dirt");
+				dirtCapacity = dirtCapacity - dirtAmount ;
+				System.out.println("Capacity is now: " + dirtCapacity);}
 			}
 		} else {
+			capacityFullNotification();
 			return;
 		}
+	}
+
+
+	private boolean capacityFullNotification(){
+		if (dirtCapacity == 0 ) {
+			System.out.println("Empty Me");
+			System.out.println("Dirt Capacity Full");
+			return true;
+		} return false;
 	}
 
 	private void makeMovement(FloorCell destinationCell) {
@@ -149,6 +173,10 @@ public class SweepMachine {
 		}
 
 		return null;
+	}
+
+	public Cell getCurrentPositionCell() {
+		return currentPositionCell;
 	}
 
 	// TODO: Sweep Machine surrounding object detection based on
