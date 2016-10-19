@@ -54,15 +54,20 @@ public class SweepMachine {
 			System.out.println("Movement stopped...");
 			return false;
 		} else {				// there is an open path on on side
-			makeMovement(destinationCell);
-			if (detectDirt(destinationCell) == true){
-				removeDirt(destinationCell);
-				if(capacityFullNotification() == true){
-					System.out.println("Movement stopped because of full capacity");
-					return false;
-				}
-			}
-
+            if(currentPositionCell instanceof FloorCell) {
+                FloorCell currentFloorCell = (FloorCell) currentPositionCell;
+                if(currentFloorCell.getDirtAmount() == 0)
+                    makeMovement(destinationCell);
+                if (detectDirt(currentFloorCell)){
+                    removeDirt(currentFloorCell);
+                    if(capacityFullNotification()){
+                        System.out.println("Movement stopped because of full capacity");
+                        return false;
+                    }
+                }
+            } else { // it's not floor cell, then it could only be Station cell
+                makeMovement(destinationCell);
+            }
 			return true;
 		}
 	}
@@ -79,33 +84,18 @@ public class SweepMachine {
 			}
 	}
 
-
-	private void removeDirt(FloorCell currentCell){
-		if (dirtCapacity > 0 ) {
-			int dirtAmount = currentCell.getDirtAmount();
-			if (dirtAmount > 0) {
-				if (dirtCapacity < dirtAmount){
-					int remainingDirt = dirtAmount - dirtCapacity;
-					dirtCapacity = dirtCapacity - dirtCapacity;
-					System.out.println("Removing  "+ dirtCapacity +" dirt");
-					currentCell.setDirtAmount(remainingDirt);
-					currentCell.setText(remainingDirt + "");
-					System.out.println("Capacity is now: " + dirtCapacity);
-
-				} else {
-				int newDirtAmount = dirtAmount - dirtAmount;
-				currentCell.setDirtAmount(newDirtAmount);
-				currentCell.setText(newDirtAmount + "");
-				System.out.println("Removing  "+ dirtAmount +" dirt");
-				dirtCapacity = dirtCapacity - dirtAmount ;
-				System.out.println("Capacity is now: " + dirtCapacity);}
-			}
-		} else {
-			capacityFullNotification();
-			return;
-		}
-	}
-
+	private void removeDirt(FloorCell currentCell) {
+        if(dirtCapacity > 0) {
+            int dirtAmount = currentCell.getDirtAmount();
+            int remainingDirt = dirtAmount - 1; // remaining dirt decrease 1
+            dirtCapacity--;  // capacity decrease 1
+            System.out.println("Current Capacity: " + dirtCapacity);
+            currentCell.setDirtAmount(remainingDirt);
+            currentCell.setText(remainingDirt + "");
+        } else {    // sweep machine has full
+            capacityFullNotification();
+        }
+    }
 
 	private boolean capacityFullNotification(){
 		if (dirtCapacity == 0 ) {
