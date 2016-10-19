@@ -6,6 +6,7 @@ import edu.depaul.cdm.se459.ui.Cell;
 import edu.depaul.cdm.se459.ui.Direction;
 import edu.depaul.cdm.se459.ui.FloorCell;
 
+import javax.swing.*;
 import java.awt.*;
 
 /**
@@ -56,16 +57,17 @@ public class SweepMachine {
 		} else {				// there is an open path on on side
             if(currentPositionCell instanceof FloorCell) {
                 FloorCell currentFloorCell = (FloorCell) currentPositionCell;
-                if(currentFloorCell.getDirtAmount() == 0)
-                    makeMovement(destinationCell);
                 if (detectDirt(currentFloorCell)){
                     removeDirt(currentFloorCell);
                     if(capacityFullNotification()){
+                        JOptionPane.showMessageDialog(null, "Sweep Machine capacity is full");
                         System.out.println("Movement stopped because of full capacity");
                         return false;
                     }
+                } else {
+                    makeMovement(destinationCell);
                 }
-            } else { // it's not floor cell, then it could only be Station cell
+            } else { // it's not floor cell, then it could only be Station cell, move forward
                 makeMovement(destinationCell);
             }
 			return true;
