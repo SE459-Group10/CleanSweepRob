@@ -94,7 +94,7 @@ public class MainFrame extends JFrame {
                             default:
                                 FloorCell floorCell = new FloorCell(new Coordinate(i, j), num);
                                 Random generator = new Random();
-                                int randomDirtAmount = generator.nextInt(10);          // give a random dirt amount from 0 to 9
+                                int randomDirtAmount = generator.nextInt(5);          // give a random dirt amount from 0 to 9
                                 floorCell.setDirtAmount(randomDirtAmount);
                                 floorCell.setText(randomDirtAmount+"");
                                 cells[i][j] = floorCell;
