@@ -33,7 +33,7 @@ public class DirtDetectionTest {
                     mainFrame.getFloorLayoutRows(), mainFrame.getFloorLayoutColumns(), initialCapacity);
 
             System.out.println("Starting Dirty Test");
-           assertTrue(innerTestDirty(sweepMachine, startStation));
+            assertTrue(innerTestDirty(sweepMachine, startStation));
 
         } catch (IOException e) {
             assertTrue(false);
@@ -57,7 +57,7 @@ public class DirtDetectionTest {
             }
 
         }
-            return false;
+        return false;
     }
 
 
