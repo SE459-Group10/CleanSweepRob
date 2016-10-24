@@ -17,7 +17,7 @@ import java.awt.*;
 public class FloorCell extends Cell {
 
 	/**
-	 * floorType: 1: bare floor 2: low pile 3: high pile 4: open door
+	 * floorType: 1: bare floor 2: low pile 3: high pile 
 	 */
 	private int floorType;
 	private int dirtAmount;
@@ -42,10 +42,6 @@ public class FloorCell extends Cell {
 			this.setBackground(Utility.HIGH_PILE_COLOR);
 			super.setBackgroundColor(Utility.HIGH_PILE_COLOR);
 			break;			
-		case 4:
-			this.setBackground(Utility.OPEN_DOOR_COLOR);
-			super.setBackgroundColor(Utility.OPEN_DOOR_COLOR);
-			break;
 		default:
 			this.setBackground(Color.WHITE);
 			this.setText("Invalid input");

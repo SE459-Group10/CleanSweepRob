@@ -23,7 +23,11 @@ public class DoorCell extends Cell {
 //		super(Utility.OPEN_DOOR_COLOR, coordinate);
 //	}
 	public DoorCell(Coordinate coordinate, boolean isOpen) {
-		super(Utility.CLOSED_DOOR_COLOR , coordinate);
+		
+			super(Utility.OPEN_DOOR_COLOR, coordinate);
+			if(isOpen==false){
+				super.setBackground(Utility.CLOSED_DOOR_COLOR);
+			}
 	}
 	public boolean isOpen() {
 		return isOpen;
@@ -31,6 +35,7 @@ public class DoorCell extends Cell {
 
 	public void setOpen(boolean open) {
 		isOpen = open;
+		
 	}
 
 }

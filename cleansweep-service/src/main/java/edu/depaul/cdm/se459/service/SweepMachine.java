@@ -166,5 +166,28 @@ public class SweepMachine {
 		return currentPositionCell;
 	}
 
+	//we need the coordinates for the station
+private void returnToChargingStation() {
+		//find the distance to the closest charging station
+		//search for a path to charging station
+	//closest
+		
+		System.out.println("Charging station reached!");
+		//battery methode called
+		System.out.println("Battery recharged to level " );
+		System.out.println("Charging is done");
+		
+	}
+		
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }
