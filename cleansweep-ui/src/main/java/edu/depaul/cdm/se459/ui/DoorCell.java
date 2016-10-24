@@ -12,16 +12,19 @@ import java.awt.*;
 /**
  * A subclass of the class Cell that contains the coordinates of a door
  * existence and if a door is open or closed and the door color
+ * 7 as closed door
  */
 public class DoorCell extends Cell {
 
 	private boolean isOpen;
 	private Coordinate coordinate;
-
+//
+//	public DoorCell(Coordinate coordinate, boolean isOpen) {
+//		super(Utility.OPEN_DOOR_COLOR, coordinate);
+//	}
 	public DoorCell(Coordinate coordinate, boolean isOpen) {
-		super(Utility.OPEN_DOOR_COLOR, coordinate);
+		super(Utility.CLOSED_DOOR_COLOR , coordinate);
 	}
-
 	public boolean isOpen() {
 		return isOpen;
 	}

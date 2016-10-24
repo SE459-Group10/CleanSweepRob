@@ -71,7 +71,7 @@ public class MainFrame extends JFrame {
                                 cells[i][j] = wallCell;
                                 panel.add(wallCell);
                                 break;
-                            case 4:
+                            case 7:
                                 DoorCell doorCell = new DoorCell(new Coordinate(i, j), true);
                                 cells[i][j] = doorCell;
                                 panel.add(doorCell);
@@ -176,10 +176,15 @@ public class MainFrame extends JFrame {
         highPileFloorLabel.setHorizontalAlignment(SwingConstants.CENTER);
         panel.add(highPileFloorLabel);
 
-        JLabel openDoorLabel = new DoorCell(new Coordinate(0, 0), true);
+        JLabel openDoorLabel = new DoorCell(new Coordinate(0, 0), false);
         openDoorLabel.setText("Open Door");
         openDoorLabel.setHorizontalAlignment(SwingConstants.CENTER);
         panel.add(openDoorLabel);
+        
+        JLabel closedDoorLabel = new DoorCell(new Coordinate(0, 0), true);
+        closedDoorLabel.setText("Closed Door");
+        closedDoorLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        panel.add(closedDoorLabel);
 
         JLabel stairLabel = new StairCell(new Coordinate(0, 0));
         stairLabel.setText("Stair");
