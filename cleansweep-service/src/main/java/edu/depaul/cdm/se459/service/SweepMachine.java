@@ -70,7 +70,7 @@ public class SweepMachine {
 	}
 
 	//detects dirt, takes in a Floor Cell, checks its dirtAmount and returns true or false if the cell is dirty.
-	private boolean detectDirt(FloorCell currentCell){
+	public boolean detectDirt(FloorCell currentCell){
 		int dirtAmount = currentCell.getDirtAmount();
 			if (dirtAmount > 0 ){
 			System.out.println(dirtAmount + " dirt present");
@@ -94,7 +94,7 @@ public class SweepMachine {
         }
     }
 
-	private boolean capacityFullNotification(){
+	public boolean capacityFullNotification(){
 		if (dirtCapacity == 0 ) {
 			System.out.println("Empty Me");
 			System.out.println("Dirt Capacity Full");
