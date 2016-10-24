@@ -1,13 +1,16 @@
 package edu.depaul.cdm.se459.service;
 
+import edu.depaul.cdm.se459.model.CellStatus;
 import edu.depaul.cdm.se459.model.Coordinate;
 import edu.depaul.cdm.se459.model.Utility;
 import edu.depaul.cdm.se459.ui.Cell;
 import edu.depaul.cdm.se459.ui.Direction;
 import edu.depaul.cdm.se459.ui.FloorCell;
+import edu.depaul.cdm.se459.ui.StationCell;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 /**
  * Created by Suqing on 10/15/16.
@@ -26,7 +29,6 @@ public class SweepMachine {
 	private int layoutRows;
 	private int layoutCols;
 	private Cell nextCell;
-	private Direction obstacleDirection;
 	private Color preColor;
 	private int dirtCapacity;
 
@@ -48,7 +50,7 @@ public class SweepMachine {
 	// move
 	// TODO: detectSurrounding() will return null if there is no movable cell,
 	// then should return false
-	public boolean move() {
+	public boolean move(CellStatus[][] cellStatuses) {
 
 		FloorCell destinationCell = detectSurrounding();
 		if (destinationCell == null) {			// there is no open path surrounding current cell
@@ -58,6 +60,12 @@ public class SweepMachine {
             if(currentPositionCell instanceof FloorCell) {
                 FloorCell currentFloorCell = (FloorCell) currentPositionCell;
                 if (detectDirt(currentFloorCell)){
+					int x = currentFloorCell.getCoordinate().getX();
+					int y = currentFloorCell.getCoordinate().getY();
+					if(!cellStatuses[y][x].equals(CellStatus.VISITEDFLOORCELL)) {
+						cellStatuses[y][x] = CellStatus.VISITEDFLOORCELL;
+					}
+
                     removeDirt(currentFloorCell);
                     if(capacityFullNotification()){
                         JOptionPane.showMessageDialog(null, "Sweep Machine capacity is full");

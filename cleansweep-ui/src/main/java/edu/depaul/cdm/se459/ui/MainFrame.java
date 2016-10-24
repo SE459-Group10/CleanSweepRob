@@ -1,5 +1,6 @@
 package edu.depaul.cdm.se459.ui;
 
+import edu.depaul.cdm.se459.model.CellStatus;
 import edu.depaul.cdm.se459.model.Coordinate;
 import edu.depaul.cdm.se459.model.Utility;
 
@@ -10,6 +11,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Random;
 import java.util.Scanner;
+
+import static edu.depaul.cdm.se459.model.CellStatus.*;
 
 /**
  * Created by Suqing on 10/2/16.
@@ -27,6 +30,7 @@ public class MainFrame extends JFrame {
     private static final int WINDOW_HEIGHT = 800;
     private static final String APP_NAME = "Clean Sweep Machine";
     private Cell[][] cells;
+    private CellStatus[][] cellStatuses;
     private StationCell startStationCell;
 
     public MainFrame(File file) throws IOException {
@@ -60,11 +64,13 @@ public class MainFrame extends JFrame {
             panel.setLayout(new GridLayout(0, cols));
 
             cells = new Cell[rows][cols];
+            cellStatuses = new CellStatus[rows][cols];
 
             for(int i = 0; i < rows; i++) {
                 for (int j = 0; j < cols; j++) {
                     if (s.hasNextInt()) {
                         int num = s.nextInt();
+                        cellStatuses[i][j] = OBSTACLE;
                         switch (num) {
                             case 0:
                                 WallCell wallCell = new WallCell(new Coordinate(i, j));
@@ -89,6 +95,8 @@ public class MainFrame extends JFrame {
                                     // initialize the start station cell of the floor plan
                                     startStationCell = stationCell;
                                 }
+                                // set start station as visited cell
+                                cellStatuses[i][j] = VISITEDFLOORCELL;
                                 panel.add(stationCell);
                                 break;
                             default:
@@ -98,6 +106,7 @@ public class MainFrame extends JFrame {
                                 floorCell.setDirtAmount(randomDirtAmount);
                                 floorCell.setText(randomDirtAmount+"");
                                 cells[i][j] = floorCell;
+                                cellStatuses[i][j] = UNVISITEDFLOORCELL;
                                 panel.add(floorCell);
                         }
                     } else throw new IOException("File data is does not match rows and columns");
@@ -117,6 +126,10 @@ public class MainFrame extends JFrame {
                 s.close();
             }
         }
+    }
+
+    public CellStatus[][] getCellStatuses() {
+        return cellStatuses;
     }
 
     public Cell[][] getCells() {

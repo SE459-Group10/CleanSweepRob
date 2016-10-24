@@ -4,6 +4,8 @@ package edu.depaul.cdm.se459.model;
  * Created by Suqing on 10/3/16.
  */
 public class Coordinate {
+    // x: columns
+    // y: rows
     private int x, y;
 
     public Coordinate() {}

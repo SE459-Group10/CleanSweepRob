@@ -2,6 +2,8 @@ package edu.depaul.cdm.se459.service;
 
 
 import static org.junit.Assert.*;
+
+import edu.depaul.cdm.se459.model.CellStatus;
 import org.junit.Test;
 import java.io.File;
 import java.io.IOException;
@@ -24,13 +26,14 @@ public class MovementTest {
             File file = new File(classLoader.getResource("file/floorplan-testmoveright.txt").getFile());
             MainFrame main = new MainFrame(file);
             Cell[][] cells = main.getCells();   // will return each cell elements
+            CellStatus[][] unvisitedFloorCells = main.getCellStatuses();
             StationCell startStation = main.getStartStationCell();
             int initialCapacity = 50;
             int proposedX =  startStation.getCoordinate().getX() ;
             int proposedY =  startStation.getCoordinate().getY();
             SweepMachine sweepMachine = new SweepMachine(startStation, cells,
                     main.getFloorLayoutRows(), main.getFloorLayoutColumns(), initialCapacity);
-            ControlSystem controlSystem = new ControlSystem(sweepMachine);
+            ControlSystem controlSystem = new ControlSystem(sweepMachine, unvisitedFloorCells);
 
 
             controlSystem.start();

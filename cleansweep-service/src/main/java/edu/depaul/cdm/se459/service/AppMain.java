@@ -1,5 +1,6 @@
 package edu.depaul.cdm.se459.service;
 
+import edu.depaul.cdm.se459.model.CellStatus;
 import edu.depaul.cdm.se459.ui.*;
 
 import javax.swing.*;
@@ -35,11 +36,13 @@ public class AppMain {
 					e.printStackTrace();
 				}
                 Cell[][] cells = main.getCells();   // will return each cell elements
+                CellStatus[][] cellStatuses = main.getCellStatuses();
                 StationCell startStation = main.getStartStationCell();
-                int initialCapacity = 50;
+                int initialCapacity = 100;
                 SweepMachine sweepMachine = new SweepMachine(startStation, cells,
                         main.getFloorLayoutRows(), main.getFloorLayoutColumns(), initialCapacity);
-                ControlSystem controlSystem = new ControlSystem(sweepMachine);
+                ControlSystem controlSystem = new ControlSystem(sweepMachine, cellStatuses);
+                controlSystem.addStationCell(startStation);  // add start station
                 controlSystem.start();
 //                sweepMachine.move();
 //                sweepMachine.detectSurrounding(Direction.North);
