@@ -71,8 +71,13 @@ public class MainFrame extends JFrame {
                                 cells[i][j] = wallCell;
                                 panel.add(wallCell);
                                 break;
+                            case 4:
+                                DoorCell doorCellOpen = new DoorCell(new Coordinate(i, j), true);
+                                cells[i][j] = doorCellOpen;
+                                panel.add(doorCellOpen);
+                                break;
                             case 7:
-                                DoorCell doorCell = new DoorCell(new Coordinate(i, j), true);
+                                DoorCell doorCell = new DoorCell(new Coordinate(i, j), false);
                                 cells[i][j] = doorCell;
                                 panel.add(doorCell);
                                 break;
@@ -96,6 +101,7 @@ public class MainFrame extends JFrame {
                                 Random generator = new Random();
                                 int randomDirtAmount = generator.nextInt(5);          // give a random dirt amount from 0 to 4
                                 floorCell.setDirtAmount(randomDirtAmount);
+                                
                                 floorCell.setText(randomDirtAmount+"");
                                 cells[i][j] = floorCell;
                                 panel.add(floorCell);
@@ -176,12 +182,13 @@ public class MainFrame extends JFrame {
         highPileFloorLabel.setHorizontalAlignment(SwingConstants.CENTER);
         panel.add(highPileFloorLabel);
 
-        JLabel openDoorLabel = new DoorCell(new Coordinate(0, 0), false);
+        JLabel openDoorLabel = new DoorCell(new Coordinate(0, 0), true);
+        openDoorLabel.setBackground(Utility.OPEN_DOOR_COLOR);
         openDoorLabel.setText("Open Door");
         openDoorLabel.setHorizontalAlignment(SwingConstants.CENTER);
         panel.add(openDoorLabel);
         
-        JLabel closedDoorLabel = new DoorCell(new Coordinate(0, 0), true);
+        JLabel closedDoorLabel = new DoorCell(new Coordinate(0, 0), false);
         closedDoorLabel.setText("Closed Door");
         closedDoorLabel.setHorizontalAlignment(SwingConstants.CENTER);
         panel.add(closedDoorLabel);

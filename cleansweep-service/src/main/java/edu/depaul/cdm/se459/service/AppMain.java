@@ -36,7 +36,7 @@ public class AppMain {
 				}
                 Cell[][] cells = main.getCells();   // will return each cell elements
                 StationCell startStation = main.getStartStationCell();
-                int initialCapacity = 50;
+                int initialCapacity = 100;
                 SweepMachine sweepMachine = new SweepMachine(startStation, cells,
                         main.getFloorLayoutRows(), main.getFloorLayoutColumns(), initialCapacity);
                 ControlSystem controlSystem = new ControlSystem(sweepMachine);
