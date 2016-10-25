@@ -2,14 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2110e1ef-388b-4a47-8703-b426a111c8db" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/cleansweep-model/src/main/java/edu/depaul/cdm/se459/model/CellStatus.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cleansweep-model/src/main/java/edu/depaul/cdm/se459/model/Coordinate.java" afterPath="$PROJECT_DIR$/cleansweep-model/src/main/java/edu/depaul/cdm/se459/model/Coordinate.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cleansweep-service/src/main/java/edu/depaul/cdm/se459/service/AppMain.java" afterPath="$PROJECT_DIR$/cleansweep-service/src/main/java/edu/depaul/cdm/se459/service/AppMain.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cleansweep-service/src/main/java/edu/depaul/cdm/se459/service/ControlSystem.java" afterPath="$PROJECT_DIR$/cleansweep-service/src/main/java/edu/depaul/cdm/se459/service/ControlSystem.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cleansweep-service/src/main/java/edu/depaul/cdm/se459/service/SweepMachine.java" afterPath="$PROJECT_DIR$/cleansweep-service/src/main/java/edu/depaul/cdm/se459/service/SweepMachine.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cleansweep-service/src/test/java/edu/depaul/cdm/se459/service/MovementTest.java" afterPath="$PROJECT_DIR$/cleansweep-service/src/test/java/edu/depaul/cdm/se459/service/MovementTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/cleansweep-ui/src/main/java/edu/depaul/cdm/se459/ui/MainFrame.java" afterPath="$PROJECT_DIR$/cleansweep-ui/src/main/java/edu/depaul/cdm/se459/ui/MainFrame.java" />
     </list>
     <ignored path="CleanSweepRob.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -37,12 +33,10 @@
       <file leaf-file-name="MainFrame.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/cleansweep-ui/src/main/java/edu/depaul/cdm/se459/ui/MainFrame.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1095">
-              <caret line="95" column="67" selection-start-line="95" selection-start-column="67" selection-end-line="95" selection-end-column="67" />
+            <state relative-caret-position="240">
+              <caret line="104" column="75" selection-start-line="104" selection-start-column="75" selection-end-line="104" selection-end-column="75" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#5229#5230#0" expanded="true" />
-                <element signature="e#5257#5258#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -51,35 +45,31 @@
       <file leaf-file-name="ControlSystem.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/cleansweep-service/src/main/java/edu/depaul/cdm/se459/service/ControlSystem.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1395">
-              <caret line="165" column="5" selection-start-line="165" selection-start-column="5" selection-end-line="165" selection-end-column="5" />
+            <state relative-caret-position="420">
+              <caret line="73" column="0" selection-start-line="73" selection-start-column="0" selection-end-line="73" selection-end-column="0" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#4414#4415#0" expanded="true" />
-                <element signature="e#4491#4492#0" expanded="true" />
-                <element signature="e#4536#4537#0" expanded="true" />
-                <element signature="e#4582#4583#0" expanded="true" />
-                <element signature="e#4627#4628#0" expanded="true" />
-                <element signature="e#4693#4694#0" expanded="true" />
-                <element signature="e#4748#4749#0" expanded="true" />
-                <element signature="e#4783#4784#0" expanded="true" />
-                <element signature="e#4855#4856#0" expanded="true" />
-                <element signature="e#4903#4904#0" expanded="true" />
-                <element signature="e#4962#4963#0" expanded="true" />
-                <element signature="e#5007#5008#0" expanded="true" />
+                <element signature="e#3228#3240#0" expanded="true" />
+                <element signature="e#4705#4711#0" expanded="true" />
+                <element signature="e#6049#6050#0" expanded="true" />
+                <element signature="e#6084#6085#0" expanded="true" />
+                <element signature="e#6156#6157#0" expanded="true" />
+                <element signature="e#6204#6205#0" expanded="true" />
+                <element signature="e#6263#6264#0" expanded="true" />
+                <element signature="e#6308#6309#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CellStatus.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/cleansweep-model/src/main/java/edu/depaul/cdm/se459/model/CellStatus.java">
+      <file leaf-file-name="Coordinate.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/cleansweep-model/src/main/java/edu/depaul/cdm/se459/model/Coordinate.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="330">
-              <caret line="22" column="9" selection-start-line="22" selection-start-column="9" selection-end-line="22" selection-end-column="9" />
+            <state relative-caret-position="285">
+              <caret line="23" column="5" selection-start-line="23" selection-start-column="5" selection-end-line="23" selection-end-column="5" />
               <folding>
-                <element signature="e#264#265#0" expanded="true" />
-                <element signature="e#294#295#0" expanded="true" />
+                <element signature="e#528#529#0" expanded="true" />
+                <element signature="e#563#564#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -88,12 +78,25 @@
       <file leaf-file-name="SweepMachine.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/cleansweep-service/src/main/java/edu/depaul/cdm/se459/service/SweepMachine.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="67" column="0" selection-start-line="67" selection-start-column="0" selection-end-line="67" selection-end-column="0" />
+            <state relative-caret-position="194">
+              <caret line="97" column="68" selection-start-line="97" selection-start-column="68" selection-end-line="97" selection-end-column="68" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#6912#6913#0" expanded="true" />
-                <element signature="e#6945#6946#0" expanded="true" />
+                <element signature="e#7028#7029#0" expanded="true" />
+                <element signature="e#7053#7054#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CellStatus.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/cleansweep-model/src/main/java/edu/depaul/cdm/se459/model/CellStatus.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="90">
+              <caret line="6" column="24" selection-start-line="6" selection-start-column="21" selection-end-line="6" selection-end-column="24" />
+              <folding>
+                <element signature="e#264#265#0" expanded="true" />
+                <element signature="e#294#295#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -102,8 +105,8 @@
       <file leaf-file-name="AppMain.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/cleansweep-service/src/main/java/edu/depaul/cdm/se459/service/AppMain.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="384">
-              <caret line="34" column="37" selection-start-line="34" selection-start-column="37" selection-end-line="34" selection-end-column="37" />
+            <state relative-caret-position="165">
+              <caret line="32" column="21" selection-start-line="32" selection-start-column="21" selection-end-line="32" selection-end-column="21" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -162,13 +165,13 @@
         <option value="$PROJECT_DIR$/cleansweep-ui/src/test/java/edu/depaul/cdm/se459/ui/MovementTest.java" />
         <option value="$PROJECT_DIR$/cleansweep-service/src/main/Test/MovementTest.java" />
         <option value="$PROJECT_DIR$/cleansweep-ui/src/main/resources/file/floorplan-testmoveright.txt" />
-        <option value="$PROJECT_DIR$/cleansweep-model/src/main/java/edu/depaul/cdm/se459/model/Coordinate.java" />
         <option value="$PROJECT_DIR$/cleansweep-service/src/test/java/edu/depaul/cdm/se459/service/MovementTest.java" />
         <option value="$PROJECT_DIR$/cleansweep-model/src/main/java/edu/depaul/cdm/se459/model/CellStatus.java" />
         <option value="$PROJECT_DIR$/cleansweep-ui/src/main/java/edu/depaul/cdm/se459/ui/MainFrame.java" />
-        <option value="$PROJECT_DIR$/cleansweep-service/src/main/java/edu/depaul/cdm/se459/service/ControlSystem.java" />
+        <option value="$PROJECT_DIR$/cleansweep-model/src/main/java/edu/depaul/cdm/se459/model/Coordinate.java" />
         <option value="$PROJECT_DIR$/cleansweep-service/src/main/java/edu/depaul/cdm/se459/service/AppMain.java" />
         <option value="$PROJECT_DIR$/cleansweep-service/src/main/java/edu/depaul/cdm/se459/service/SweepMachine.java" />
+        <option value="$PROJECT_DIR$/cleansweep-service/src/main/java/edu/depaul/cdm/se459/service/ControlSystem.java" />
       </list>
     </option>
   </component>
@@ -243,9 +246,9 @@
     </treeState>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="56" />
+    <option name="x" value="599" />
     <option name="y" value="23" />
-    <option name="width" value="1101" />
+    <option name="width" value="1282" />
     <option name="height" value="873" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
@@ -1148,7 +1151,7 @@
       <workItem from="1476905618143" duration="3593000" />
       <workItem from="1477014921028" duration="3798000" />
       <workItem from="1477074796714" duration="217000" />
-      <workItem from="1477279739267" duration="18478000" />
+      <workItem from="1477279739267" duration="29377000" />
     </task>
     <task id="LOCAL-00001" summary="added control system v1">
       <created>1476640623998</created>
@@ -1200,10 +1203,10 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="66981000" />
+    <option name="totallyTimeSpent" value="77880000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="56" y="23" width="1101" height="873" extended-state="0" />
+    <frame x="599" y="23" width="1282" height="873" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -1218,7 +1221,7 @@
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.27289897" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.23306452" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
@@ -1251,7 +1254,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="28" />
+      <option name="time" value="30" />
     </breakpoint-manager>
     <watches-manager />
   </component>
@@ -1462,13 +1465,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
           <caret line="23" column="29" selection-start-line="23" selection-start-column="29" selection-end-line="23" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cleansweep-ui/src/main/java/edu/depaul/cdm/se459/ui/FloorCell.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="840">
-          <caret line="67" column="19" selection-start-line="67" selection-start-column="19" selection-end-line="67" selection-end-column="19" />
           <folding />
         </state>
       </provider>
@@ -1517,17 +1513,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/cleansweep-model/src/main/java/edu/depaul/cdm/se459/model/Coordinate.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="14" selection-start-line="7" selection-start-column="14" selection-end-line="7" selection-end-column="14" />
-          <folding>
-            <element signature="e#295#296#0" expanded="false" />
-            <element signature="e#319#320#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/cleansweep-service/src/test/java/edu/depaul/cdm/se459/service/MovementTest.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="100">
@@ -1536,10 +1521,21 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/cleansweep-ui/src/main/java/edu/depaul/cdm/se459/ui/FloorCell.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="840">
+          <caret line="67" column="19" selection-start-line="67" selection-start-column="19" selection-end-line="67" selection-end-column="19" />
+          <folding>
+            <element signature="e#1590#1591#0" expanded="true" />
+            <element signature="e#1613#1614#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/cleansweep-model/src/main/java/edu/depaul/cdm/se459/model/CellStatus.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="330">
-          <caret line="22" column="9" selection-start-line="22" selection-start-column="9" selection-end-line="22" selection-end-column="9" />
+        <state relative-caret-position="90">
+          <caret line="6" column="24" selection-start-line="6" selection-start-column="21" selection-end-line="6" selection-end-column="24" />
           <folding>
             <element signature="e#264#265#0" expanded="true" />
             <element signature="e#294#295#0" expanded="true" />
@@ -1547,22 +1543,31 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/cleansweep-model/src/main/java/edu/depaul/cdm/se459/model/Coordinate.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="23" column="5" selection-start-line="23" selection-start-column="5" selection-end-line="23" selection-end-column="5" />
+          <folding>
+            <element signature="e#528#529#0" expanded="true" />
+            <element signature="e#563#564#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/cleansweep-ui/src/main/java/edu/depaul/cdm/se459/ui/MainFrame.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1095">
-          <caret line="95" column="67" selection-start-line="95" selection-start-column="67" selection-end-line="95" selection-end-column="67" />
+        <state relative-caret-position="240">
+          <caret line="104" column="75" selection-start-line="104" selection-start-column="75" selection-end-line="104" selection-end-column="75" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#5229#5230#0" expanded="true" />
-            <element signature="e#5257#5258#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/cleansweep-service/src/main/java/edu/depaul/cdm/se459/service/AppMain.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="384">
-          <caret line="34" column="37" selection-start-line="34" selection-start-column="37" selection-end-line="34" selection-end-column="37" />
+        <state relative-caret-position="165">
+          <caret line="32" column="21" selection-start-line="32" selection-start-column="21" selection-end-line="32" selection-end-column="21" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1571,34 +1576,30 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/cleansweep-service/src/main/java/edu/depaul/cdm/se459/service/SweepMachine.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="67" column="0" selection-start-line="67" selection-start-column="0" selection-end-line="67" selection-end-column="0" />
+        <state relative-caret-position="194">
+          <caret line="97" column="68" selection-start-line="97" selection-start-column="68" selection-end-line="97" selection-end-column="68" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#6912#6913#0" expanded="true" />
-            <element signature="e#6945#6946#0" expanded="true" />
+            <element signature="e#7028#7029#0" expanded="true" />
+            <element signature="e#7053#7054#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/cleansweep-service/src/main/java/edu/depaul/cdm/se459/service/ControlSystem.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1395">
-          <caret line="165" column="5" selection-start-line="165" selection-start-column="5" selection-end-line="165" selection-end-column="5" />
+        <state relative-caret-position="420">
+          <caret line="73" column="0" selection-start-line="73" selection-start-column="0" selection-end-line="73" selection-end-column="0" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#4414#4415#0" expanded="true" />
-            <element signature="e#4491#4492#0" expanded="true" />
-            <element signature="e#4536#4537#0" expanded="true" />
-            <element signature="e#4582#4583#0" expanded="true" />
-            <element signature="e#4627#4628#0" expanded="true" />
-            <element signature="e#4693#4694#0" expanded="true" />
-            <element signature="e#4748#4749#0" expanded="true" />
-            <element signature="e#4783#4784#0" expanded="true" />
-            <element signature="e#4855#4856#0" expanded="true" />
-            <element signature="e#4903#4904#0" expanded="true" />
-            <element signature="e#4962#4963#0" expanded="true" />
-            <element signature="e#5007#5008#0" expanded="true" />
+            <element signature="e#3228#3240#0" expanded="true" />
+            <element signature="e#4705#4711#0" expanded="true" />
+            <element signature="e#6049#6050#0" expanded="true" />
+            <element signature="e#6084#6085#0" expanded="true" />
+            <element signature="e#6156#6157#0" expanded="true" />
+            <element signature="e#6204#6205#0" expanded="true" />
+            <element signature="e#6263#6264#0" expanded="true" />
+            <element signature="e#6308#6309#0" expanded="true" />
           </folding>
         </state>
       </provider>

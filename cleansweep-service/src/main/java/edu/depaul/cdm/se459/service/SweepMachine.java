@@ -51,35 +51,31 @@ public class SweepMachine {
 	// TODO: detectSurrounding() will return null if there is no movable cell,
 	// then should return false
 	public boolean move(CellStatus[][] cellStatuses) {
-
-		FloorCell destinationCell = detectSurrounding();
-		if (destinationCell == null) {			// there is no open path surrounding current cell
-			System.out.println("Movement stopped...");
-			return false;
-		} else {				// there is an open path on on side
             if(currentPositionCell instanceof FloorCell) {
                 FloorCell currentFloorCell = (FloorCell) currentPositionCell;
+				// set current position cell as visited
+				int x = currentFloorCell.getCoordinate().getX();
+				int y = currentFloorCell.getCoordinate().getY();
+				if(!cellStatuses[y][x].equals(CellStatus.VISITEDFLOORCELL)) {
+					cellStatuses[y][x] = CellStatus.VISITEDFLOORCELL;
+				}
+				// detect dirt at current position
                 if (detectDirt(currentFloorCell)){
-					int x = currentFloorCell.getCoordinate().getX();
-					int y = currentFloorCell.getCoordinate().getY();
-					if(!cellStatuses[y][x].equals(CellStatus.VISITEDFLOORCELL)) {
-						cellStatuses[y][x] = CellStatus.VISITEDFLOORCELL;
-					}
-
-                    removeDirt(currentFloorCell);
-                    if(capacityFullNotification()){
-                        JOptionPane.showMessageDialog(null, "Sweep Machine capacity is full");
-                        System.out.println("Movement stopped because of full capacity");
-                        return false;
-                    }
-                } else {
-                    makeMovement(destinationCell);
+                    if(!removeDirt(currentFloorCell))
+                    	return false;
+                } else {	// if no dirt at current position, try to make movement
+					FloorCell destinationCell = detectSurrounding();
+					if(destinationCell != null)
+                    	makeMovement(destinationCell);
+					else return false;
                 }
             } else { // it's not floor cell, then it could only be Station cell, move forward
-                makeMovement(destinationCell);
+				FloorCell destinationCell = detectSurrounding();
+				if(destinationCell != null)
+                	makeMovement(destinationCell);
+				else return false;
             }
 			return true;
-		}
 	}
 
 	//detects dirt, takes in a Floor Cell, checks its dirtAmount and returns true or false if the cell is dirty.
@@ -94,7 +90,7 @@ public class SweepMachine {
 			}
 	}
 
-	private void removeDirt(FloorCell currentCell) {
+	private boolean removeDirt(FloorCell currentCell) {
         if(dirtCapacity > 0) {
             int dirtAmount = currentCell.getDirtAmount();
             int remainingDirt = dirtAmount - 1; // remaining dirt decrease 1
@@ -102,23 +98,29 @@ public class SweepMachine {
             System.out.println("Current Capacity: " + dirtCapacity);
             currentCell.setDirtAmount(remainingDirt);
             currentCell.setText(remainingDirt + "");
+			return true;
         } else {    // sweep machine has full
-            capacityFullNotification();
+            return capacityFullNotification();
         }
     }
 
-	private boolean capacityFullNotification(){
-		if (dirtCapacity == 0 ) {
-			System.out.println("Empty Me");
-			System.out.println("Dirt Capacity Full");
-			return true;
-		} return false;
+    public void showEmptyMeDialog() {
+		JOptionPane.showMessageDialog(null, "Sweep Machine capacity is full");
+		System.out.println("Movement stopped because of full capacity");
 	}
 
-	private void makeMovement(FloorCell destinationCell) {
+	private boolean capacityFullNotification(){
+		if (dirtCapacity == 0 ) {
+			showEmptyMeDialog();
+			return false;
+		} return true;
+	}
+
+	public void makeMovement(Cell destinationCell) {
 		currentPositionCell.setBackground(preColor);		// change current position cell's background to it's original state
 		currentPositionCell = destinationCell;				// make movement
-		destinationCell.setVisited(true);
+		if(destinationCell instanceof FloorCell)
+			((FloorCell)destinationCell).setVisited(true);
 		preColor = destinationCell.getBackgroundColor();	// change previous color to the destination cell's original color
 		currentPositionCell.setBackground(Utility.SWEEP_MACHINE_COLOR);	// change destination cell's background to sweep machine
 	}
@@ -179,30 +181,7 @@ public class SweepMachine {
 		return currentPositionCell;
 	}
 
-	// TODO: Sweep Machine surrounding object detection based on
-	// currentPositionCoordinate
-	// TODO: should return null if there is no movable surrounding cell
-	public Cell detectSurrounding(Direction obstacleDirection) {
-		// TODO: this is just a sample way to access current cell's
-		// surroundings, and check its instance
-		if (obstacleDirection == Direction.North) {
-			Cell NorthCell = layoutCells[currentPositionCell.getCoordinate().getY() - 1][currentPositionCell.getCoordinate().getX()];
-			nextCell = NorthCell;
-		} else if (obstacleDirection == Direction.South) {
-			Cell nextCellSouth = layoutCells[currentPositionCell.getCoordinate().getY() + 1][currentPositionCell.getCoordinate().getX()];
-			nextCell = nextCellSouth;
-		} else if (obstacleDirection == Direction.West) {
-			Cell nextCellWest = layoutCells[currentPositionCell.getCoordinate().getY()][currentPositionCell.getCoordinate().getX() - 1];
-			nextCell = nextCellWest;
-		} else if (obstacleDirection == Direction.East) {
-			Cell nextCellEast = layoutCells[currentPositionCell.getCoordinate().getY()][currentPositionCell.getCoordinate().getX() + 1];
-			nextCell = nextCellEast;
-		}
-		return nextCell;
-		// Cell nextCell =
-		// layoutCells[currentPositionCoordinate.getY()-1][currentPositionCoordinate.getX()];
-		// if(nextCell instanceof FloorCell)
-		// nextCell.setBackground(Utility.SWEEP_MACHINE_COLOR);
-		// return null;
+	public Cell[][] getLayoutCells() {
+		return layoutCells;
 	}
 }

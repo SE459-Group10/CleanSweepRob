@@ -2,11 +2,12 @@ package edu.depaul.cdm.se459.service;
 
 import edu.depaul.cdm.se459.model.CellStatus;
 import edu.depaul.cdm.se459.model.Coordinate;
-import edu.depaul.cdm.se459.ui.Cell;
-import edu.depaul.cdm.se459.ui.StationCell;
+import edu.depaul.cdm.se459.ui.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.Queue;
 
 /**
  * Created by Suqing on 10/17/16.
@@ -22,7 +23,7 @@ public class ControlSystem extends Thread {
     private final static int PATH = 3;
     private int height;
     private int width;
-    private Cell destinationCell;
+    private Cell[][] cells;
 
     public ControlSystem(SweepMachine sweepMachine, CellStatus[][] cellStatuses) {
         this.sweepMachine = sweepMachine;
@@ -31,6 +32,9 @@ public class ControlSystem extends Thread {
         this.height = cellStatuses.length;
         this.width = cellStatuses[0].length;
         this.pathGrid = new int[height][width];
+        // init pathGrid values
+        resetPathGrid();
+        cells = sweepMachine.getLayoutCells();
     }
 
     @Override
@@ -46,19 +50,32 @@ public class ControlSystem extends Thread {
 //                    previousPositionCell = sweepMachine.getCurrentPositionCell();
 
                 if(!sweepMachine.move(cellStatuses)) {
-                    //moveToDestination(sweepMachine, stationCells.get(0));
+
+
+                    {   // this block is handling sweepMachine has reached its capacity
+                        Cell currentPositionCell = sweepMachine.getCurrentPositionCell();
+                        StationCell baseStation = stationCells.get(0);
+                        // return to charging station
+                        ArrayList<Coordinate> path = getShortestPath(currentPositionCell, baseStation);
+                        for (int i = 0; i < path.size(); i++) {
+                            Coordinate nextCoordinate = path.get(i);
+                            sweepMachine.makeMovement(cells[nextCoordinate.getY()][nextCoordinate.getX()]);
+                            Thread.sleep(1000);
+                        }
+                        // show empty me message
+                        sweepMachine.showEmptyMeDialog();
+                        // back to previous position
+                        for (int i = path.size() - 1; i >= 0; i--) {
+                            Coordinate nextCoordinate = path.get(i);
+                            sweepMachine.makeMovement(cells[nextCoordinate.getY()][nextCoordinate.getX()]);
+                            Thread.sleep(1000);
+                        }
+                    }
+
                     break;
+
                 }
-                    //printStatus();
-//                    while (moveToDestination(sweepMachine, stationCells.get(0))) {
-////                        Thread.sleep(1000);
-//                    }
-                    //moveToDestination(sweepMachine, stationCells.get(0));
-//                    // TODO show empty me message
-//                    System.out.println("Empty me");
-//                    while(moveToDestination(cellStatuses, sweepMachine, previousPositionCell)) {
-//                        Thread.sleep(1000);
-//                    }
+
                 Thread.sleep(100);
             }
         } catch (InterruptedException e) {
@@ -66,80 +83,67 @@ public class ControlSystem extends Thread {
         }
     }
 
-    public boolean moveToDestination(SweepMachine sweepMachine, Cell destinationCell) {
-        Cell currentPositionCell = sweepMachine.getCurrentPositionCell();
-        this.destinationCell = destinationCell;
-        System.out.println("Destination is: " + destinationCell.getCoordinate().getX() + ", " + destinationCell.getCoordinate().getY());
-        findShortestPath(currentPositionCell);
-        printGrid();
-        return true;
-    }
-
-    private boolean findShortestPath(Cell currentPositionCell) {
-        int col = currentPositionCell.getCoordinate().getX();
-        int row = currentPositionCell.getCoordinate().getY();
-        return traverse(row, col);
-    }
-
-    private boolean traverse(int i, int j) {
-        if(!isValidPosition(i, j)) return false;
-
-        if(isDestination(i, j)) {
-            pathGrid[i][j] = PATH;
-            return true;
-        } else {
-            pathGrid[i][j] = TRIED;
+    private ArrayList<Coordinate> getShortestPath(Cell currentCell, Cell destCell) {
+        ArrayList<Coordinate> res = new ArrayList<Coordinate>();
+        int col = currentCell.getCoordinate().getX();
+        int row = currentCell.getCoordinate().getY();
+        bfs(row, col);
+        Coordinate destCoordinate = destCell.getCoordinate();
+        int desCol = destCoordinate.getX();
+        int desRow = destCoordinate.getY();
+        res.add(new Coordinate(desRow, desCol));
+        int destWeight = pathGrid[desRow][desCol];
+        while(destWeight != 0) {
+            // check surrounding weight if is less by 1
+            if(pathGrid[desRow-1][desCol] == destWeight-1) {
+                res.add(0, new Coordinate(desRow-1, desCol));
+                desRow--;
+            } else if(pathGrid[desRow][desCol-1] == destWeight -1) {
+                res.add(0, new Coordinate(desRow, desCol-1));
+                desCol--;
+            } else if(pathGrid[desRow+1][desCol] == destWeight-1) {
+                res.add(0, new Coordinate(desRow+1, desCol));
+                desRow++;
+            } else if(pathGrid[desRow][desCol+1] == destWeight-1) {
+                res.add(0, new Coordinate(desRow, desCol+1));
+                desCol++;
+            }
+            destWeight--;
         }
-
-        // North check
-        if(traverse(i - 1, j)) {
-            pathGrid[i-1][j] = PATH;
-            return true;
+        for(Coordinate c: res) {
+            System.out.println(c);
         }
-        // East check
-        if(traverse(i, j+1)) {
-            pathGrid[i][j+1] = PATH;
-            return true;
-        }
-        // South check
-        if(traverse(i+1, j)) {
-            pathGrid[i+1][j] = PATH;
-            return true;
-        }
-        // West check
-        if(traverse(i, j-1)) {
-            pathGrid[i][j-1] = PATH;
-            return true;
-        }
-
-        return false;
+        // reset grid for next time use
+        resetPathGrid();
+        return res;
     }
 
-    private boolean isValidPosition(int i, int j) {
-        if(inRange(i, j) && isOpen(i, j) && !isTried(i, j)) {
-            return true;
+    private void bfs(int currentRow, int currentCol) {
+        Cell[][] cells = sweepMachine.getLayoutCells();
+        Queue<Cell> queue = new LinkedList<Cell>();
+        queue.add(cells[currentRow][currentCol]);
+        int weight = 0;
+        pathGrid[currentRow][currentCol] = weight;
+        while(!queue.isEmpty()) {       // while queue not empty
+            Cell cell = queue.remove();
+            // check cell's surrounding cells
+            Coordinate coordinate = cell.getCoordinate();
+            int col = coordinate.getX();
+            int row = coordinate.getY();
+
+            checkSurroundingCell(cells, row, col, row-1, col, queue);
+            checkSurroundingCell(cells, row, col, row, col-1, queue);
+            checkSurroundingCell(cells, row, col, row+1, col, queue);
+            checkSurroundingCell(cells, row, col, row, col+1, queue);
         }
-        return false;
     }
 
-    private boolean isDestination(int i, int j) {
-        Coordinate coordinate = destinationCell.getCoordinate();
-        int dHeight = coordinate.getX();
-        int dWidth = coordinate.getY();
-        System.out.println("i = " + i + ", j = " + j + ", height = " + dWidth + ", width = " + dHeight);
-        return i == dWidth && j == dHeight;
-    }
-
-    private boolean isOpen(int i, int j) {
-        return cellStatuses[i][j].equals(CellStatus.VISITEDFLOORCELL);
-    }
-
-    private boolean isTried(int i, int j) {
-        return pathGrid[i][j] == TRIED;
-    }
-
-    private boolean inRange(int i, int j) {
-        return i >= 0 && i < height && j >= 0 && j < width;
+    private void checkSurroundingCell(Cell[][] cells, int curRow, int curCol, int nextRow, int nextCol, Queue<Cell> queue) {
+        if(((cells[nextRow][nextCol] instanceof FloorCell) || (cells[nextRow][nextCol] instanceof StationCell) || (cells[nextRow][nextCol] instanceof DoorCell))
+                && pathGrid[nextRow][nextCol] > pathGrid[curRow][curCol] && cellStatuses[nextRow][nextCol].equals(CellStatus.VISITEDFLOORCELL)) {
+            pathGrid[nextRow][nextCol] = pathGrid[curRow][curCol] + 1;
+            queue.add(cells[nextRow][nextCol]);
+        }
     }
 
     public ArrayList<StationCell> getStationCells() {
@@ -172,6 +176,14 @@ public class ControlSystem extends Thread {
         }
 
         System.out.print(s);
+    }
+
+    private void resetPathGrid() {
+        for(int i = 0; i < height; i++) {
+            for(int j = 0; j < width; j++) {
+                pathGrid[i][j] = Integer.MAX_VALUE;
+            }
+        }
     }
 
 
