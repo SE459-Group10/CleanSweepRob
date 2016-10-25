@@ -166,6 +166,10 @@ public class SweepMachine {
 		return currentPositionCell;
 	}
 
+	public int getDirtCapacity(){
+		return this.dirtCapacity;
+	}
+
 	//we need the coordinates for the station
 private void returnToChargingStation() {
 		//find the distance to the closest charging station
