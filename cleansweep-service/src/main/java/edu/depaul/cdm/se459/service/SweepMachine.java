@@ -3,6 +3,7 @@ package edu.depaul.cdm.se459.service;
 import edu.depaul.cdm.se459.model.Coordinate;
 import edu.depaul.cdm.se459.model.Utility;
 import edu.depaul.cdm.se459.ui.Cell;
+import edu.depaul.cdm.se459.ui.DoorCell;
 import edu.depaul.cdm.se459.ui.FloorCell;
 
 import javax.swing.*;
@@ -122,6 +123,20 @@ public class SweepMachine {
 					return floorCell;
 				}
 			}
+			else if(checkingCell instanceof DoorCell){
+				//ckeck true or not
+				DoorCell doorCell=(DoorCell)checkingCell;
+				if(doorCell.isOpen()==true){
+					//checkingCell is the cell we move into
+					currentPositionCell=doorCell;
+					checkingCell=currentPositionCell;
+					checkingCell = layoutCells[currentPositionCell.getCoordinate().getY() - 1][currentPositionCell.getCoordinate().getX()];
+					//current cell x1==x2 door cell
+						//	x3==x1
+					//y3=y2-1 or y2+1
+					
+				}
+		}
 		}
 		// check south side cell
 		if(currentPositionCell.getCoordinate().getY() + 1 < layoutRows) {		// check if out of bound on south side
@@ -132,7 +147,20 @@ public class SweepMachine {
 					System.out.println("Open path on south...");
 					return floorCell;
 				}
+				
 			}
+			else if(checkingCell instanceof DoorCell){
+				//ckeck true or not
+				DoorCell doorCell=(DoorCell)checkingCell;
+				if(doorCell.isOpen()==true){
+					currentPositionCell=doorCell;
+					checkingCell=currentPositionCell;
+					checkingCell = layoutCells[currentPositionCell.getCoordinate().getY() - 1][currentPositionCell.getCoordinate().getX()];
+					//current call x1==x2 door cell
+						//	x3==x1
+					//y3=y2-1 or y2+1
+				}
+		}
 		}
 
 		// check east side cell
@@ -145,6 +173,19 @@ public class SweepMachine {
 					return floorCell;
 				}
 			}
+			else if(checkingCell instanceof DoorCell){
+				//ckeck true or not
+				DoorCell doorCell=(DoorCell)checkingCell;
+				if(doorCell.isOpen()==true){
+					currentPositionCell=doorCell;
+					checkingCell=currentPositionCell;
+					checkingCell = layoutCells[currentPositionCell.getCoordinate().getY()][currentPositionCell.getCoordinate().getX()-1];
+				
+					//current call x1==x2 door cell
+						//	x3==x1
+					//y3=y2-1 or y2+1
+				}
+		}
 		}
 
 		// check north side cell
@@ -157,6 +198,20 @@ public class SweepMachine {
 					return floorCell;
 				}
 			}
+			else if(checkingCell instanceof DoorCell){
+				//ckeck true or not
+				DoorCell doorCell=(DoorCell)checkingCell;
+				//FloorCell floorCell2 = (FloorCell) checkingCell;
+				if(doorCell.isOpen()==true){
+					currentPositionCell=doorCell;
+					checkingCell=currentPositionCell;
+					checkingCell = layoutCells[currentPositionCell.getCoordinate().getY()][currentPositionCell.getCoordinate().getX()+1];
+				//return floorCell;
+					//current call x1==x2 door cell
+						//	x3==x1
+					//y3=y2-1 or y2+1
+				}
+		}
 		}
 
 		return null;
