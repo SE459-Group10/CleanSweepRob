@@ -11,7 +11,6 @@ import java.io.IOException;
 
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -62,6 +61,7 @@ public class CapacityFullNotificationStoppedTest {
             System.out.println("Starting Full Stopped Test");
             ControlSystem controlSystem = new ControlSystem(sweepMachine, cellStatuses);
             controlSystem.start();
+
             if(sweepMachine.capacityFullNotification() == true){
             assertTrue(sweepMachine.getDirtCapacity() == 0);
             }

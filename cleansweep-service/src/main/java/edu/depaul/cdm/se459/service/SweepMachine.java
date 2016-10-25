@@ -89,7 +89,7 @@ public class SweepMachine {
 			}
 	}
 
-	private boolean removeDirt(FloorCell currentCell) {
+	public boolean removeDirt(FloorCell currentCell) {
         if(dirtCapacity > 0) {
             int dirtAmount = currentCell.getDirtAmount();
             int remainingDirt = dirtAmount - 1; // remaining dirt decrease 1
