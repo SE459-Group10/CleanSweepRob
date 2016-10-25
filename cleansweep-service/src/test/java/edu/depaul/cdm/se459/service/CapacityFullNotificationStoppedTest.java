@@ -1,5 +1,6 @@
 package edu.depaul.cdm.se459.service;
 
+import edu.depaul.cdm.se459.model.CellStatus;
 import edu.depaul.cdm.se459.ui.Cell;
 import edu.depaul.cdm.se459.ui.FloorCell;
 import edu.depaul.cdm.se459.ui.MainFrame;
@@ -28,11 +29,12 @@ public class CapacityFullNotificationStoppedTest {
             Cell[][] cells = mainFrame.getCells();   // will return each cell elements
             StationCell startStation = mainFrame.getStartStationCell();
             int initialCapacity = 0 ;
+            CellStatus[][] cellStatuses = mainFrame.getCellStatuses();
 
             SweepMachine sweepMachine = new SweepMachine(startStation, cells,
                     mainFrame.getFloorLayoutRows(), mainFrame.getFloorLayoutColumns(), initialCapacity);
 
-            sweepMachine.move();
+            sweepMachine.move(cellStatuses);
             System.out.println("Starting Notification Test");
             assertTrue(sweepMachine.capacityFullNotification());
 
@@ -51,13 +53,14 @@ public class CapacityFullNotificationStoppedTest {
             Cell[][] cells = mainFrame.getCells();   // will return each cell elements
             StationCell startStation = mainFrame.getStartStationCell();
             int initialCapacity = 50 ;
+            CellStatus[][] cellStatuses = mainFrame.getCellStatuses();
 
             SweepMachine sweepMachine = new SweepMachine(startStation, cells,
                     mainFrame.getFloorLayoutRows(), mainFrame.getFloorLayoutColumns(), initialCapacity);
 
 
             System.out.println("Starting Full Stopped Test");
-            ControlSystem controlSystem = new ControlSystem(sweepMachine);
+            ControlSystem controlSystem = new ControlSystem(sweepMachine, cellStatuses);
             controlSystem.start();
             if(sweepMachine.capacityFullNotification() == true){
             assertTrue(sweepMachine.getDirtCapacity() == 0);

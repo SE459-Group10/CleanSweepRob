@@ -1,5 +1,6 @@
 package edu.depaul.cdm.se459.service;
 
+import edu.depaul.cdm.se459.model.CellStatus;
 import edu.depaul.cdm.se459.ui.Cell;
 import edu.depaul.cdm.se459.ui.FloorCell;
 import edu.depaul.cdm.se459.ui.MainFrame;
@@ -28,12 +29,13 @@ public class DirtDetectionTest {
             Cell[][] cells = mainFrame.getCells();   // will return each cell elements
             StationCell startStation = mainFrame.getStartStationCell();
             int initialCapacity = 50;
+            CellStatus[][] cellStatuses = mainFrame.getCellStatuses();
 
             SweepMachine sweepMachine = new SweepMachine(startStation, cells,
                     mainFrame.getFloorLayoutRows(), mainFrame.getFloorLayoutColumns(), initialCapacity);
 
             System.out.println("Starting Dirty Test");
-            assertTrue(innerTestDirty(sweepMachine, startStation));
+            assertTrue(innerTestDirty(sweepMachine, startStation, cellStatuses));
 
         } catch (IOException e) {
             assertTrue(false);
@@ -43,12 +45,13 @@ public class DirtDetectionTest {
 
 
 
-    public boolean innerTestDirty(SweepMachine sweepMachine, StationCell startStation) {
-        sweepMachine.move();
+    public boolean innerTestDirty(SweepMachine sweepMachine, StationCell startStation, CellStatus[][] cellStatuses) {
+
+        sweepMachine.move(cellStatuses);
         while (sweepMachine.getCurrentPositionCell() != startStation) {
-            sweepMachine.move();
+            sweepMachine.move(cellStatuses);
             if (sweepMachine.getCurrentPositionCell().getText() != "0") {
-                if (sweepMachine.detectDirt((FloorCell) sweepMachine.getCurrentPositionCell()) == true)
+                if (sweepMachine.detectDirt((FloorCell)sweepMachine.getCurrentPositionCell()) == true)
                     return true;
             }
             else {

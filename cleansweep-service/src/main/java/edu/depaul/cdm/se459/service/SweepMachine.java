@@ -4,7 +4,6 @@ import edu.depaul.cdm.se459.model.CellStatus;
 import edu.depaul.cdm.se459.model.Coordinate;
 import edu.depaul.cdm.se459.model.Utility;
 import edu.depaul.cdm.se459.ui.Cell;
-import edu.depaul.cdm.se459.ui.Direction;
 import edu.depaul.cdm.se459.ui.FloorCell;
 import edu.depaul.cdm.se459.ui.StationCell;
 
@@ -79,7 +78,7 @@ public class SweepMachine {
 	}
 
 	//detects dirt, takes in a Floor Cell, checks its dirtAmount and returns true or false if the cell is dirty.
-	private boolean detectDirt(FloorCell currentCell){
+	public boolean detectDirt(FloorCell currentCell){
 		int dirtAmount = currentCell.getDirtAmount();
 			if (dirtAmount > 0 ){
 			System.out.println(dirtAmount + " dirt present");
@@ -109,7 +108,7 @@ public class SweepMachine {
 		System.out.println("Movement stopped because of full capacity");
 	}
 
-	private boolean capacityFullNotification(){
+	public boolean capacityFullNotification(){
 		if (dirtCapacity == 0 ) {
 			showEmptyMeDialog();
 			return false;
@@ -183,5 +182,9 @@ public class SweepMachine {
 
 	public Cell[][] getLayoutCells() {
 		return layoutCells;
+	}
+
+	public int getDirtCapacity() {
+		return dirtCapacity;
 	}
 }
