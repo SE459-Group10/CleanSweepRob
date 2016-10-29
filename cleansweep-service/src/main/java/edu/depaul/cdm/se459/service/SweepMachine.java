@@ -4,6 +4,7 @@ import edu.depaul.cdm.se459.model.CellStatus;
 import edu.depaul.cdm.se459.model.Coordinate;
 import edu.depaul.cdm.se459.model.Utility;
 import edu.depaul.cdm.se459.ui.Cell;
+import edu.depaul.cdm.se459.ui.DoorCell;
 import edu.depaul.cdm.se459.ui.FloorCell;
 import edu.depaul.cdm.se459.ui.StationCell;
 
@@ -44,11 +45,6 @@ public class SweepMachine {
 		// battery life
 	}
 
-	// TODO: Sweep Machine movements based on currentPositionCoordinate
-	// TODO: need to call detectSurrounding() to get the destination cell to
-	// move
-	// TODO: detectSurrounding() will return null if there is no movable cell,
-	// then should return false
 	public boolean move(CellStatus[][] cellStatuses) {
             if(currentPositionCell instanceof FloorCell) {
                 FloorCell currentFloorCell = (FloorCell) currentPositionCell;
@@ -136,7 +132,18 @@ public class SweepMachine {
 					return floorCell;
 				}
 			}
+			else if(checkingCell instanceof DoorCell){// check if it's a DoorCell instance
+				DoorCell doorCell=(DoorCell)checkingCell;
+				if(doorCell.isOpen()==true){
+					 checkingCell = layoutCells[currentPositionCell.getCoordinate().getY() - 2][currentPositionCell.getCoordinate().getX()];
+	                    FloorCell floorCell = (FloorCell) checkingCell;    // cast Cell to FloorCell to get if it's visited
+	                    if (!floorCell.isVisited()) {               // check if it's been visited or not
+	                        System.out.println("Open path on north...");
+	                        return floorCell;
+	                    }
+				}
 		}
+	}
 		// check south side cell
 		if(currentPositionCell.getCoordinate().getY() + 1 < layoutRows) {		// check if out of bound on south side
 			checkingCell = layoutCells[currentPositionCell.getCoordinate().getY() + 1][currentPositionCell.getCoordinate().getX()];
@@ -147,7 +154,19 @@ public class SweepMachine {
 					return floorCell;
 				}
 			}
+			else if(checkingCell instanceof DoorCell){
+				DoorCell doorCell=(DoorCell)checkingCell;
+				if(doorCell.isOpen()==true){
+					checkingCell = layoutCells[currentPositionCell.getCoordinate().getY() + 2][currentPositionCell.getCoordinate().getX()];
+                    FloorCell floorCell = (FloorCell) checkingCell;    // cast Cell to FloorCell to get if it's visited
+                    if (!floorCell.isVisited()) {               // check if it's been visited or not
+                        System.out.println("Open path on north...");
+                        return floorCell;
+                    }
+				
+				}
 		}
+	}
 
 		// check east side cell
 		if(currentPositionCell.getCoordinate().getX() - 1 >= 0) {		// check if out of bound on east side
@@ -159,9 +178,21 @@ public class SweepMachine {
 					return floorCell;
 				}
 			}
+			else if(checkingCell instanceof DoorCell){
+				DoorCell doorCell=(DoorCell)checkingCell;
+				if(doorCell.isOpen()==true){
+					checkingCell = layoutCells[currentPositionCell.getCoordinate().getY()][currentPositionCell.getCoordinate().getX() + 2];
+                    FloorCell floorCell = (FloorCell) checkingCell;    // cast Cell to FloorCell to get if it's visited
+                    if (!floorCell.isVisited()) {               // check if it's been visited or not
+                        System.out.println("Open path on north...");
+                        return floorCell;
+                    }
+				
+				}
 		}
+	}
 
-		// check north side cell
+		// check west side cell
 		if(currentPositionCell.getCoordinate().getX() + 1 < layoutCols) {		// check if out of bound on west side
 			checkingCell = layoutCells[currentPositionCell.getCoordinate().getY()][currentPositionCell.getCoordinate().getX() - 1];
 			if (checkingCell instanceof FloorCell) {
@@ -171,7 +202,19 @@ public class SweepMachine {
 					return floorCell;
 				}
 			}
+			else if(checkingCell instanceof DoorCell){
+				DoorCell doorCell=(DoorCell)checkingCell;
+				if(doorCell.isOpen()==true){
+					 checkingCell = layoutCells[currentPositionCell.getCoordinate().getY()][currentPositionCell.getCoordinate().getX() - 2];
+	                    FloorCell floorCell = (FloorCell) checkingCell;    // cast Cell to FloorCell to get if it's visited
+	                    if (!floorCell.isVisited()) {               // check if it's been visited or not
+	                        System.out.println("Open path on north...");
+	                        return floorCell;
+	                    }
+			
+				}
 		}
+	}
 
 		return null;
 	}
