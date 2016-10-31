@@ -18,17 +18,17 @@ import java.util.ArrayList;
 
 /**
  * A class for the vacuum cleaner that determines the current position of the
- * machine, depending on the class Cell coordinate. Also detects the surrounding
- * objects
+ * machine, depending on the class Cell coordinate. 
+ * Detects the surrounding objects and make the movement into the next Cell 
+ * Detects if a Cell is dirty and cleans the Cell
+ * Notify when capacity is full
  */
 public class SweepMachine {
 
 	private Cell currentPositionCell;// home Cell
-	// Cell[rows][cols]
-	private Cell[][] layoutCells;
+	private Cell[][] layoutCells;// Cell[rows][cols]
 	private int layoutRows;
 	private int layoutCols;
-	private Cell nextCell;
 	private Color preColor;
 	private int dirtCapacity;
 
@@ -40,7 +40,6 @@ public class SweepMachine {
 		this.preColor = currentPositionCell.getBackgroundColor();
 		this.dirtCapacity = dirtCapacity;
 		currentPositionCell.setBackground(Utility.SWEEP_MACHINE_COLOR);
-
 		// add visited and not visited cells
 		// battery life
 	}
@@ -54,6 +53,7 @@ public class SweepMachine {
 				if(!cellStatuses[y][x].equals(CellStatus.VISITEDFLOORCELL)) {
 					cellStatuses[y][x] = CellStatus.VISITEDFLOORCELL;
 				}
+				detectSurface(currentFloorCell);//depending on that the battery consumption is changed
 				// detect dirt at current position
                 if (detectDirt(currentFloorCell)){
                     if(!removeDirt(currentFloorCell))
@@ -61,18 +61,31 @@ public class SweepMachine {
                 } else {	// if no dirt at current position, try to make movement
 					FloorCell destinationCell = detectSurrounding();
 					if(destinationCell != null)
-                    	makeMovement(destinationCell);
+                    	makeMovement(destinationCell);//call the method to make the movement
 					else return false;
                 }
             } else { // it's not floor cell, then it could only be Station cell, move forward
 				FloorCell destinationCell = detectSurrounding();
 				if(destinationCell != null)
-                	makeMovement(destinationCell);
+                	makeMovement(destinationCell);//call the method to make the movement 
 				else return false;
             }
 			return true;
 	}
-
+	
+	//connects with the battery consumption
+	//should return the power consumption 
+public void detectSurface(FloorCell currentCell){
+	int surface=currentCell.getFloorType();
+	if (surface==1){
+		System.out.println( " bare floor surface");//battery consumption is one unit 
+	}else if (surface==2){
+		System.out.println(" low pile surface ");//battery consumption is two unit 
+	}else{
+		System.out.println(" high pile surface");//battery consumption is three unit 
+	}
+}
+	
 	//detects dirt, takes in a Floor Cell, checks its dirtAmount and returns true or false if the cell is dirty.
 	public boolean detectDirt(FloorCell currentCell){
 		int dirtAmount = currentCell.getDirtAmount();
@@ -84,7 +97,8 @@ public class SweepMachine {
 			return false;
 			}
 	}
-
+	
+//removes the dirt from the Floor Cell
 	public boolean removeDirt(FloorCell currentCell) {
         if(dirtCapacity > 0) {
             int dirtAmount = currentCell.getDirtAmount();
@@ -95,7 +109,7 @@ public class SweepMachine {
             currentCell.setText(remainingDirt + "");
 			return true;
         } else {    // sweep machine has full
-            return capacityFullNotification();
+            return capacityFullNotification();//call the method to show the message
         }
     }
 
@@ -111,6 +125,7 @@ public class SweepMachine {
 		} return true;
 	}
 
+	//make the movement in the UI
 	public void makeMovement(Cell destinationCell) {
 		currentPositionCell.setBackground(preColor);		// change current position cell's background to it's original state
 		currentPositionCell = destinationCell;				// make movement
@@ -120,6 +135,8 @@ public class SweepMachine {
 		currentPositionCell.setBackground(Utility.SWEEP_MACHINE_COLOR);	// change destination cell's background to sweep machine
 	}
 
+
+	
 	private FloorCell detectSurrounding() {
 		Cell checkingCell = null;
 		// check north side cell
@@ -128,7 +145,7 @@ public class SweepMachine {
 			if (checkingCell instanceof FloorCell) {		// check if it's a FloorCell instance
 				FloorCell floorCell = (FloorCell) checkingCell;    // cast Cell to FloorCell to get if it's visited
 				if (!floorCell.isVisited()) {				// check if it's been visited or not
-					System.out.println("Open path on north...");
+				System.out.println("Open path on north...");
 					return floorCell;
 				}
 			}
@@ -140,7 +157,7 @@ public class SweepMachine {
 	                    if (!floorCell.isVisited()) {               // check if it's been visited or not
 	                        System.out.println("Open path on north...");
 	                        return floorCell;
-	                    }
+	                   }
 				}
 		}
 	}
@@ -160,9 +177,9 @@ public class SweepMachine {
 					checkingCell = layoutCells[currentPositionCell.getCoordinate().getY() + 2][currentPositionCell.getCoordinate().getX()];
                     FloorCell floorCell = (FloorCell) checkingCell;    // cast Cell to FloorCell to get if it's visited
                     if (!floorCell.isVisited()) {               // check if it's been visited or not
-                        System.out.println("Open path on north...");
+                       System.out.println("Open path on south...");
                         return floorCell;
-                    }
+                   }
 				
 				}
 		}
@@ -174,7 +191,7 @@ public class SweepMachine {
 			if (checkingCell instanceof FloorCell) {
 				FloorCell floorCell = (FloorCell) checkingCell;    // cast Cell to FloorCell to get if it's visited
 				if (!floorCell.isVisited()) {
-					System.out.println("Open path on east...");
+				System.out.println("Open path on east...");
 					return floorCell;
 				}
 			}
@@ -183,10 +200,10 @@ public class SweepMachine {
 				if(doorCell.isOpen()==true){
 					checkingCell = layoutCells[currentPositionCell.getCoordinate().getY()][currentPositionCell.getCoordinate().getX() + 2];
                     FloorCell floorCell = (FloorCell) checkingCell;    // cast Cell to FloorCell to get if it's visited
-                    if (!floorCell.isVisited()) {               // check if it's been visited or not
-                        System.out.println("Open path on north...");
+                  if (!floorCell.isVisited()) {               // check if it's been visited or not
+                       System.out.println("Open path on east...");
                         return floorCell;
-                    }
+                  }
 				
 				}
 		}
@@ -207,10 +224,10 @@ public class SweepMachine {
 				if(doorCell.isOpen()==true){
 					 checkingCell = layoutCells[currentPositionCell.getCoordinate().getY()][currentPositionCell.getCoordinate().getX() - 2];
 	                    FloorCell floorCell = (FloorCell) checkingCell;    // cast Cell to FloorCell to get if it's visited
-	                    if (!floorCell.isVisited()) {               // check if it's been visited or not
-	                        System.out.println("Open path on north...");
+	                   if (!floorCell.isVisited()) {               // check if it's been visited or not
+	                        System.out.println("Open path on west...");
 	                        return floorCell;
-	                    }
+	                   }
 			
 				}
 		}
