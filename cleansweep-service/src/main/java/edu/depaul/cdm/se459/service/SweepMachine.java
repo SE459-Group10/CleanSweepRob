@@ -31,6 +31,7 @@ public class SweepMachine {
 	private int layoutCols;
 	private Color preColor;
 	private int dirtCapacity;
+	public static final int DIRT_CAPACITY = 20;
 
 	public SweepMachine(Cell currentPositionCell, Cell[][] layoutCells, int layoutCols, int layoutRows, int dirtCapacity) {
 		this.currentPositionCell = currentPositionCell;
@@ -109,12 +110,14 @@ public void detectSurface(FloorCell currentCell){
             currentCell.setText(remainingDirt + "");
 			return true;
         } else {    // sweep machine has full
-            return capacityFullNotification();//call the method to show the message
+			return false;	// return to charging station
+            //return capacityFullNotification(); //call the method to show the message
         }
     }
 
     public void showEmptyMeDialog() {
 		JOptionPane.showMessageDialog(null, "Sweep Machine capacity is full");
+		emptyDirtCapacity();
 		System.out.println("Movement stopped because of full capacity");
 	}
 
@@ -246,5 +249,9 @@ public void detectSurface(FloorCell currentCell){
 
 	public int getDirtCapacity() {
 		return dirtCapacity;
+	}
+
+	public void emptyDirtCapacity() {
+		this.dirtCapacity = DIRT_CAPACITY;
 	}
 }

@@ -49,9 +49,9 @@ public class ControlSystem extends Thread {
                 // step 3: go back to previous cell position
 //                    previousPositionCell = sweepMachine.getCurrentPositionCell();
 
-                if(!sweepMachine.move(cellStatuses)) {
+                if(!sweepMachine.move(cellStatuses)) {  // not able to move
 
-
+                    // sweepMachine reaches capacity
                     {   // this block is handling sweepMachine has reached its capacity
                         Cell currentPositionCell = sweepMachine.getCurrentPositionCell();
                         StationCell baseStation = stationCells.get(0);
@@ -64,6 +64,7 @@ public class ControlSystem extends Thread {
                         }
                         // show empty me message
                         sweepMachine.showEmptyMeDialog();
+
                         // back to previous position
                         for (int i = path.size() - 1; i >= 0; i--) {
                             Coordinate nextCoordinate = path.get(i);
@@ -72,7 +73,13 @@ public class ControlSystem extends Thread {
                         }
                     }
 
-                    break;
+                    // sweepMachine blocked at a corner
+                    // todo: move to the closest unvisited floor cell and start cleaning
+                    // todo: calculate the closest unvisited floor cell by using CellStatus
+                    // todo: get the shortest path to the closest unvisited floor cell
+                    // todo: move the sweep machine through the shortest path to the closest unvisited floor cell
+
+                    //break;
 
                 }
 
