@@ -76,25 +76,32 @@ public class SweepMachine {
 	
 	//connects with the battery consumption
 	//should return the power consumption 
-public void detectSurface(FloorCell currentCell){
+public int detectSurface(FloorCell currentCell){
+
 	int surface=currentCell.getFloorType();
 	if (surface==1){
-		System.out.println( " bare floor surface");//battery consumption is one unit 
+		System.out.println( " bare floor surface");//battery consumption is one unit
+		return 1;
 	}else if (surface==2){
-		System.out.println(" low pile surface ");//battery consumption is two unit 
+		System.out.println(" low pile surface ");//battery consumption is two unit
+		return 2;
 	}else{
-		System.out.println(" high pile surface");//battery consumption is three unit 
+		System.out.println(" high pile surface");//battery consumption is three unit
+		return 3;
 	}
 }
 	
 	//detects dirt, takes in a Floor Cell, checks its dirtAmount and returns true or false if the cell is dirty.
 	public boolean detectDirt(FloorCell currentCell){
 		int dirtAmount = currentCell.getDirtAmount();
+		int cellType = currentCell.getFloorType();
 			if (dirtAmount > 0 ){
 			System.out.println(dirtAmount + " dirt present");
+				System.out.println(cellType + "");
 				return true;
 			} else {
 				System.out.println("No dirt");
+				System.out.println(cellType + "");
 			return false;
 			}
 	}
