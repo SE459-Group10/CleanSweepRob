@@ -81,6 +81,7 @@ public class MainFrame extends JFrame {
                                 DoorCell doorCellOpen = new DoorCell(new Coordinate(i, j), true);
                                 cells[i][j] = doorCellOpen;
                                 panel.add(doorCellOpen);
+                                cellStatuses[i][j] = UNVISITEDFLOORCELL;
                                 break;
                             case 7:
                                 DoorCell doorCell = new DoorCell(new Coordinate(i, j), false);

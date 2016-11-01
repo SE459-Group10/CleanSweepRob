@@ -31,7 +31,7 @@ public class SweepMachine {
 	private int layoutCols;
 	private Color preColor;
 	private int dirtCapacity;
-	public static final int DIRT_CAPACITY = 20;
+	public static final int DIRT_CAPACITY = 50;
 
 	public SweepMachine(Cell currentPositionCell, Cell[][] layoutCells, int layoutCols, int layoutRows, int dirtCapacity) {
 		this.currentPositionCell = currentPositionCell;
@@ -60,13 +60,13 @@ public class SweepMachine {
                     if(!removeDirt(currentFloorCell))
                     	return false;
                 } else {	// if no dirt at current position, try to make movement
-					FloorCell destinationCell = detectSurrounding();
+					FloorCell destinationCell = detectSurrounding(cellStatuses);
 					if(destinationCell != null)
                     	makeMovement(destinationCell);//call the method to make the movement
 					else return false;
                 }
             } else { // it's not floor cell, then it could only be Station cell, move forward
-				FloorCell destinationCell = detectSurrounding();
+				FloorCell destinationCell = detectSurrounding(cellStatuses);
 				if(destinationCell != null)
                 	makeMovement(destinationCell);//call the method to make the movement 
 				else return false;
@@ -140,7 +140,7 @@ public void detectSurface(FloorCell currentCell){
 
 
 	
-	private FloorCell detectSurrounding() {
+	private FloorCell detectSurrounding(CellStatus[][] cellStatuses) {
 		Cell checkingCell = null;
 		// check north side cell
 		if(currentPositionCell.getCoordinate().getY() - 1 >= 0) {		// check if out of bound on north side
@@ -154,7 +154,12 @@ public void detectSurface(FloorCell currentCell){
 			}
 			else if(checkingCell instanceof DoorCell){// check if it's a DoorCell instance
 				DoorCell doorCell=(DoorCell)checkingCell;
-				if(doorCell.isOpen()==true){
+				if(doorCell.isOpen()){
+					int x = doorCell.getCoordinate().getX();
+					int y = doorCell.getCoordinate().getY();
+					if(!cellStatuses[y][x].equals(CellStatus.VISITEDFLOORCELL)) {
+						cellStatuses[y][x] = CellStatus.VISITEDFLOORCELL;
+					}
 					 checkingCell = layoutCells[currentPositionCell.getCoordinate().getY() - 2][currentPositionCell.getCoordinate().getX()];
 	                    FloorCell floorCell = (FloorCell) checkingCell;    // cast Cell to FloorCell to get if it's visited
 	                    if (!floorCell.isVisited()) {               // check if it's been visited or not
@@ -176,7 +181,12 @@ public void detectSurface(FloorCell currentCell){
 			}
 			else if(checkingCell instanceof DoorCell){
 				DoorCell doorCell=(DoorCell)checkingCell;
-				if(doorCell.isOpen()==true){
+				if(doorCell.isOpen()){
+					int x = doorCell.getCoordinate().getX();
+					int y = doorCell.getCoordinate().getY();
+					if(!cellStatuses[y][x].equals(CellStatus.VISITEDFLOORCELL)) {
+						cellStatuses[y][x] = CellStatus.VISITEDFLOORCELL;
+					}
 					checkingCell = layoutCells[currentPositionCell.getCoordinate().getY() + 2][currentPositionCell.getCoordinate().getX()];
                     FloorCell floorCell = (FloorCell) checkingCell;    // cast Cell to FloorCell to get if it's visited
                     if (!floorCell.isVisited()) {               // check if it's been visited or not
@@ -200,7 +210,12 @@ public void detectSurface(FloorCell currentCell){
 			}
 			else if(checkingCell instanceof DoorCell){
 				DoorCell doorCell=(DoorCell)checkingCell;
-				if(doorCell.isOpen()==true){
+				if(doorCell.isOpen()){
+					int x = doorCell.getCoordinate().getX();
+					int y = doorCell.getCoordinate().getY();
+					if(!cellStatuses[y][x].equals(CellStatus.VISITEDFLOORCELL)) {
+						cellStatuses[y][x] = CellStatus.VISITEDFLOORCELL;
+					}
 					checkingCell = layoutCells[currentPositionCell.getCoordinate().getY()][currentPositionCell.getCoordinate().getX() + 2];
                     FloorCell floorCell = (FloorCell) checkingCell;    // cast Cell to FloorCell to get if it's visited
                   if (!floorCell.isVisited()) {               // check if it's been visited or not
@@ -224,7 +239,12 @@ public void detectSurface(FloorCell currentCell){
 			}
 			else if(checkingCell instanceof DoorCell){
 				DoorCell doorCell=(DoorCell)checkingCell;
-				if(doorCell.isOpen()==true){
+				if(doorCell.isOpen()){
+					int x = doorCell.getCoordinate().getX();
+					int y = doorCell.getCoordinate().getY();
+					if(!cellStatuses[y][x].equals(CellStatus.VISITEDFLOORCELL)) {
+						cellStatuses[y][x] = CellStatus.VISITEDFLOORCELL;
+					}
 					 checkingCell = layoutCells[currentPositionCell.getCoordinate().getY()][currentPositionCell.getCoordinate().getX() - 2];
 	                    FloorCell floorCell = (FloorCell) checkingCell;    // cast Cell to FloorCell to get if it's visited
 	                   if (!floorCell.isVisited()) {               // check if it's been visited or not
