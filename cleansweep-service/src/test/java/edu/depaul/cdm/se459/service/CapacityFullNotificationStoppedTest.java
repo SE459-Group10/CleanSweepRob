@@ -28,10 +28,11 @@ public class CapacityFullNotificationStoppedTest {
             Cell[][] cells = mainFrame.getCells();   // will return each cell elements
             StationCell startStation = mainFrame.getStartStationCell();
             int initialCapacity = 0 ;
+            int initialBattery=0;
             CellStatus[][] cellStatuses = mainFrame.getCellStatuses();
 
             SweepMachine sweepMachine = new SweepMachine(startStation, cells,
-                    mainFrame.getFloorLayoutRows(), mainFrame.getFloorLayoutColumns(), initialCapacity);
+                    mainFrame.getFloorLayoutRows(), mainFrame.getFloorLayoutColumns(), initialCapacity,initialBattery);
 
             sweepMachine.move(cellStatuses);
             System.out.println("Starting Notification Test");
@@ -52,10 +53,11 @@ public class CapacityFullNotificationStoppedTest {
             Cell[][] cells = mainFrame.getCells();   // will return each cell elements
             StationCell startStation = mainFrame.getStartStationCell();
             int initialCapacity = 50 ;
+            int initialBattery = 100 ;
             CellStatus[][] cellStatuses = mainFrame.getCellStatuses();
 
             SweepMachine sweepMachine = new SweepMachine(startStation, cells,
-                    mainFrame.getFloorLayoutRows(), mainFrame.getFloorLayoutColumns(), initialCapacity);
+                    mainFrame.getFloorLayoutRows(), mainFrame.getFloorLayoutColumns(), initialCapacity,initialBattery);
 
 
             System.out.println("Starting Full Stopped Test");

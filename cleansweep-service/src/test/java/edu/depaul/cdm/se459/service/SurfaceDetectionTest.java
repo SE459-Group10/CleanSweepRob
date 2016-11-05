@@ -29,10 +29,11 @@ public class SurfaceDetectionTest {
             CellStatus[][] unvisitedFloorCells = main.getCellStatuses();
             StationCell startStation = main.getStartStationCell();
             int initialCapacity = 50;
+            int initialBattery=100;
             int proposedX =  startStation.getCoordinate().getX() ;
             int proposedY =  startStation.getCoordinate().getY();
             SweepMachine sweepMachine = new SweepMachine(startStation, cells,
-                    main.getFloorLayoutRows(), main.getFloorLayoutColumns(), initialCapacity);
+                    main.getFloorLayoutRows(), main.getFloorLayoutColumns(), initialCapacity, initialBattery);
 
             sweepMachine.move(unvisitedFloorCells);
 
@@ -60,10 +61,11 @@ public class SurfaceDetectionTest {
             CellStatus[][] unvisitedFloorCells = main.getCellStatuses();
             StationCell startStation = main.getStartStationCell();
             int initialCapacity = 50;
+            int initialBattery=100;
             int proposedX =  startStation.getCoordinate().getX() ;
             int proposedY =  startStation.getCoordinate().getY();
             SweepMachine sweepMachine = new SweepMachine(startStation, cells,
-                    main.getFloorLayoutRows(), main.getFloorLayoutColumns(), initialCapacity);
+                    main.getFloorLayoutRows(), main.getFloorLayoutColumns(), initialCapacity, initialBattery);
 
             sweepMachine.move(unvisitedFloorCells);
 
@@ -92,10 +94,11 @@ public class SurfaceDetectionTest {
             CellStatus[][] unvisitedFloorCells = main.getCellStatuses();
             StationCell startStation = main.getStartStationCell();
             int initialCapacity = 50;
+            int initialBattery=100;
             int proposedX =  startStation.getCoordinate().getX() ;
             int proposedY =  startStation.getCoordinate().getY();
             SweepMachine sweepMachine = new SweepMachine(startStation, cells,
-                    main.getFloorLayoutRows(), main.getFloorLayoutColumns(), initialCapacity);
+                    main.getFloorLayoutRows(), main.getFloorLayoutColumns(), initialCapacity,  initialBattery);
 
             sweepMachine.move(unvisitedFloorCells);
 

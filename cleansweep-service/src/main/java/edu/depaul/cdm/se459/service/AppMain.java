@@ -39,8 +39,9 @@ public class AppMain {
                 CellStatus[][] cellStatuses = main.getCellStatuses();
                 StationCell startStation = main.getStartStationCell();
                 int initialCapacity = SweepMachine.DIRT_CAPACITY;
+                int initialBattery=SweepMachine.MAX_BATTERY_CAPACITY;
                 SweepMachine sweepMachine = new SweepMachine(startStation, cells,
-                        main.getFloorLayoutRows(), main.getFloorLayoutColumns(), initialCapacity);
+                        main.getFloorLayoutRows(), main.getFloorLayoutColumns(), initialCapacity,initialBattery);
                 ControlSystem controlSystem = new ControlSystem(sweepMachine, cellStatuses);
                 controlSystem.addStationCell(startStation);  // add start station
                 controlSystem.start();

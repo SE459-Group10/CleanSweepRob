@@ -29,10 +29,11 @@ public class MovementTest {
             CellStatus[][] unvisitedFloorCells = mainFrame.getCellStatuses();
             StationCell startStation = mainFrame.getStartStationCell();
             int initialCapacity = 50;
+            int initialBattery=100;
             int proposedX =  startStation.getCoordinate().getX() + 1 ;
             int proposedY =  startStation.getCoordinate().getY();
             SweepMachine sweepMachine = new SweepMachine(startStation, cells,
-                    mainFrame.getFloorLayoutRows(), mainFrame.getFloorLayoutColumns(), initialCapacity);
+                    mainFrame.getFloorLayoutRows(), mainFrame.getFloorLayoutColumns(), initialCapacity, initialBattery);
             sweepMachine.move(unvisitedFloorCells);
             Cell actualPosition = sweepMachine.getCurrentPositionCell();
 
@@ -56,10 +57,11 @@ public class MovementTest {
             CellStatus[][] unvisitedFloorCells = mainFrame.getCellStatuses();
             StationCell startStation = mainFrame.getStartStationCell();
             int initialCapacity = 50;
+            int initialBattery=100;
             int proposedX =  startStation.getCoordinate().getX() - 1 ;
             int proposedY =  startStation.getCoordinate().getY();
             SweepMachine sweepMachine = new SweepMachine(startStation, cells,
-                    mainFrame.getFloorLayoutRows(), mainFrame.getFloorLayoutColumns(), initialCapacity);
+                    mainFrame.getFloorLayoutRows(), mainFrame.getFloorLayoutColumns(), initialCapacity, initialBattery);
             sweepMachine.move(unvisitedFloorCells);
             Cell actualPosition = sweepMachine.getCurrentPositionCell();
 
@@ -85,10 +87,11 @@ public class MovementTest {
             CellStatus[][] unvisitedFloorCells = mainFrame.getCellStatuses();
             StationCell startStation = mainFrame.getStartStationCell();
             int initialCapacity = 50;
+            int initialBattery=100;
             int proposedX =  startStation.getCoordinate().getX() ;
             int proposedY =  startStation.getCoordinate().getY() -1;
             SweepMachine sweepMachine = new SweepMachine(startStation, cells,
-                    mainFrame.getFloorLayoutRows(), mainFrame.getFloorLayoutColumns(), initialCapacity);
+                    mainFrame.getFloorLayoutRows(), mainFrame.getFloorLayoutColumns(), initialCapacity, initialBattery);
             sweepMachine.move(unvisitedFloorCells);
             Cell actualPosition = sweepMachine.getCurrentPositionCell();
 
@@ -112,10 +115,11 @@ public class MovementTest {
             CellStatus[][] unvisitedFloorCells = mainFrame.getCellStatuses();
             StationCell startStation = mainFrame.getStartStationCell();
             int initialCapacity = 50;
+            int initialBattery=100;
             int proposedX =  startStation.getCoordinate().getX();
             int proposedY =  startStation.getCoordinate().getY() + 1;
             SweepMachine sweepMachine = new SweepMachine(startStation, cells,
-                    mainFrame.getFloorLayoutRows(), mainFrame.getFloorLayoutColumns(), initialCapacity);
+                    mainFrame.getFloorLayoutRows(), mainFrame.getFloorLayoutColumns(), initialCapacity, initialBattery);
             sweepMachine.move(unvisitedFloorCells);
             Cell actualPosition = sweepMachine.getCurrentPositionCell();
 

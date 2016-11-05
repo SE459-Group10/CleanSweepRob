@@ -31,18 +31,19 @@ public class SweepMachine {
 	private int layoutCols;
 	private Color preColor;
 	private int dirtCapacity;
+	private double CurrentBatteryLevel;
 	public static final int DIRT_CAPACITY = 50;
+	public static final int MAX_BATTERY_CAPACITY = 100;
 
-	public SweepMachine(Cell currentPositionCell, Cell[][] layoutCells, int layoutCols, int layoutRows, int dirtCapacity) {
+	public SweepMachine(Cell currentPositionCell, Cell[][] layoutCells, int layoutCols, int layoutRows, int dirtCapacity,double CurrentBatteryLevel) {
 		this.currentPositionCell = currentPositionCell;
 		this.layoutCells = layoutCells;
 		this.layoutRows = layoutRows;
 		this.layoutCols = layoutCols;
 		this.preColor = currentPositionCell.getBackgroundColor();
 		this.dirtCapacity = dirtCapacity;
+		this.CurrentBatteryLevel=CurrentBatteryLevel;
 		currentPositionCell.setBackground(Utility.SWEEP_MACHINE_COLOR);
-		// add visited and not visited cells
-		// battery life
 	}
 
 	public boolean move(CellStatus[][] cellStatuses) {
@@ -61,9 +62,12 @@ public class SweepMachine {
                     	return false;
                 } else {	// if no dirt at current position, try to make movement
 					FloorCell destinationCell = detectSurrounding(cellStatuses);
-					if(destinationCell != null)
+					if(destinationCell != null){
+						// calculateBatteryReduction(currentFloorCell,destinationCell);//reduce the battery
+						 CurrentBatteryLevel=CurrentBatteryLevel-calculateBatteryReduction(currentFloorCell,destinationCell);//remain battery
+						 System.out.println( " the remaining battery is"+ CurrentBatteryLevel);
                     	makeMovement(destinationCell);//call the method to make the movement
-					else return false;
+					}else return false;
                 }
             } else { // it's not floor cell, then it could only be Station cell, move forward
 				FloorCell destinationCell = detectSurrounding(cellStatuses);
@@ -81,16 +85,29 @@ public int detectSurface(FloorCell currentCell){
 	int surface=currentCell.getFloorType();
 	if (surface==1){
 		System.out.println( " bare floor surface");//battery consumption is one unit
+		//reduce battery by one
 		return 1;
 	}else if (surface==2){
 		System.out.println(" low pile surface ");//battery consumption is two unit
+		//reduce battery by two
 		return 2;
-	}else{
+	}else{//reduce battery by three
 		System.out.println(" high pile surface");//battery consumption is three unit
 		return 3;
 	}
 }
-	
+	//reduce battery method based on different surfaces
+public double calculateBatteryReduction(FloorCell currentCell, FloorCell destinationCell) {//floor cell
+    double remainBattery = 0;
+    double CurrentSurface, DestinationSurface;
+    	CurrentSurface = (double) currentCell.getFloorType();//surface of current cell
+    	DestinationSurface = (double) destinationCell.getFloorType();//surface of destination cell
+    	remainBattery = (CurrentSurface + DestinationSurface) / 2;
+    	System.out.println(" Battery reduction is"+remainBattery+"%");
+    return remainBattery; 
+}
+
+
 	//detects dirt, takes in a Floor Cell, checks its dirtAmount and returns true or false if the cell is dirty.
 	public boolean detectDirt(FloorCell currentCell){
 		int dirtAmount = currentCell.getDirtAmount();
@@ -121,20 +138,32 @@ public int detectSurface(FloorCell currentCell){
             //return capacityFullNotification(); //call the method to show the message
         }
     }
-
+	 //for dirt capacity
     public void showEmptyMeDialog() {
 		JOptionPane.showMessageDialog(null, "Sweep Machine capacity is full");
 		emptyDirtCapacity();
 		System.out.println("Movement stopped because of full capacity");
 	}
-
+    //for battery
+    public void showRechargeDialog() {
+  		JOptionPane.showMessageDialog(null, "Sweep Machine Battery is empty");
+  		RechargeBatteryCapacity();
+  		System.out.println("Return to charging station");
+  	}
+  //for dirt capacity
 	public boolean capacityFullNotification(){
 		if (dirtCapacity == 0 ) {
 			showEmptyMeDialog();
 			return false;
 		} return true;
 	}
-
+	 //for battery
+	public boolean batteryEmptyNotification(){
+		if (CurrentBatteryLevel== 0 ) {
+			showRechargeDialog();
+			return false;
+		} return true;
+	}
 	//make the movement in the UI
 	public void makeMovement(Cell destinationCell) {
 		currentPositionCell.setBackground(preColor);		// change current position cell's background to it's original state
@@ -277,7 +306,15 @@ public int detectSurface(FloorCell currentCell){
 	public int getDirtCapacity() {
 		return dirtCapacity;
 	}
-
+	/**
+	 * Get the battery current level
+	 */
+	public double getBatteryLevel() {
+		return CurrentBatteryLevel;
+	}
+	public void RechargeBatteryCapacity() {
+		this.CurrentBatteryLevel = MAX_BATTERY_CAPACITY ;
+	}
 	public void emptyDirtCapacity() {
 		this.dirtCapacity = DIRT_CAPACITY;
 	}

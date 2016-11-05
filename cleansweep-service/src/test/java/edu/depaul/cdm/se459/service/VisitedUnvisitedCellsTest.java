@@ -31,9 +31,9 @@ public class VisitedUnvisitedCellsTest {
             CellStatus[][] unvisitedFloorCells = main.getCellStatuses();
             StationCell startStation = main.getStartStationCell();
             int initialCapacity = 50;
-
+            int initialBattery=100;
             SweepMachine sweepMachine = new SweepMachine(startStation, cells,
-                    main.getFloorLayoutRows(), main.getFloorLayoutColumns(), initialCapacity);
+                    main.getFloorLayoutRows(), main.getFloorLayoutColumns(), initialCapacity, initialBattery);
 
             sweepMachine.move(unvisitedFloorCells);
             Cell  visitedPosition = sweepMachine.getCurrentPositionCell();
@@ -58,9 +58,9 @@ public class VisitedUnvisitedCellsTest {
             CellStatus[][] unvisitedFloorCells = main.getCellStatuses();
             StationCell startStation = main.getStartStationCell();
             int initialCapacity = 50;
-
+            int initialBattery=100;
             SweepMachine sweepMachine = new SweepMachine(startStation, cells,
-                    main.getFloorLayoutRows(), main.getFloorLayoutColumns(), initialCapacity);
+                    main.getFloorLayoutRows(), main.getFloorLayoutColumns(), initialCapacity ,initialBattery);
 
             sweepMachine.move(unvisitedFloorCells);
 
