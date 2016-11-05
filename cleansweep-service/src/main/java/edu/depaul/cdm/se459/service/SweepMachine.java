@@ -63,10 +63,13 @@ public class SweepMachine {
                 } else {	// if no dirt at current position, try to make movement
 					FloorCell destinationCell = detectSurrounding(cellStatuses);
 					if(destinationCell != null){
-						// calculateBatteryReduction(currentFloorCell,destinationCell);//reduce the battery
-						 CurrentBatteryLevel=CurrentBatteryLevel-calculateBatteryReduction(currentFloorCell,destinationCell);//remain battery
+						//3 is the max average cost/when reach it return to base 
+						if(CurrentBatteryLevel > 3.0) {
+						 this.CurrentBatteryLevel=this.CurrentBatteryLevel-calculateBatteryReduction(currentFloorCell,destinationCell);//remain battery
 						 System.out.println( " the remaining battery is"+ CurrentBatteryLevel);
                     	makeMovement(destinationCell);//call the method to make the movement
+						}
+						else return false;
 					}else return false;
                 }
             } else { // it's not floor cell, then it could only be Station cell, move forward
@@ -97,6 +100,7 @@ public int detectSurface(FloorCell currentCell){
 	}
 }
 	//reduce battery method based on different surfaces
+//(location A + location B) / 2
 public double calculateBatteryReduction(FloorCell currentCell, FloorCell destinationCell) {//floor cell
     double remainBattery = 0;
     double CurrentSurface, DestinationSurface;
@@ -157,13 +161,7 @@ public double calculateBatteryReduction(FloorCell currentCell, FloorCell destina
 			return false;
 		} return true;
 	}
-	 //for battery
-	public boolean batteryEmptyNotification(){
-		if (CurrentBatteryLevel== 0 ) {
-			showRechargeDialog();
-			return false;
-		} return true;
-	}
+	
 	//make the movement in the UI
 	public void makeMovement(Cell destinationCell) {
 		currentPositionCell.setBackground(preColor);		// change current position cell's background to it's original state

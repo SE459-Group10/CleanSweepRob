@@ -74,6 +74,27 @@ public class ControlSystem extends Thread {
                             Thread.sleep(100);
                         }
                     }
+                    else if(sweepMachine.getBatteryLevel() < 3.0)
+                    {   // this block is handling sweepMachine has reached its capacity
+                        Cell currentPositionCell = sweepMachine.getCurrentPositionCell();
+                        StationCell baseStation = stationCells.get(0);
+                        // return to charging station
+                        ArrayList<Coordinate> path = getShortestPath(currentPositionCell, baseStation, true);
+                        for (int i = 0; i < path.size(); i++) {
+                            Coordinate nextCoordinate = path.get(i);
+                            sweepMachine.makeMovement(cells[nextCoordinate.getY()][nextCoordinate.getX()]);
+                            Thread.sleep(100);
+                        }
+                        // show empty me message
+                        sweepMachine.showRechargeDialog();
+
+                        // back to previous position
+                        for (int i = path.size() - 1; i >= 0; i--) {
+                            Coordinate nextCoordinate = path.get(i);
+                            sweepMachine.makeMovement(cells[nextCoordinate.getY()][nextCoordinate.getX()]);
+                            Thread.sleep(100);
+                        }
+                    }
                     else {
                         Cell currentCell = sweepMachine.getCurrentPositionCell();
                         int col = currentCell.getCoordinate().getX();
