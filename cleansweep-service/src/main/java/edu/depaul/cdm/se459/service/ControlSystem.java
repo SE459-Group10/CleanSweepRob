@@ -4,10 +4,7 @@ import edu.depaul.cdm.se459.model.CellStatus;
 import edu.depaul.cdm.se459.model.Coordinate;
 import edu.depaul.cdm.se459.ui.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.Queue;
+import java.util.*;
 
 /**
  * Created by Suqing on 10/17/16.
@@ -25,6 +22,7 @@ public class ControlSystem extends Thread {
     private int width;
     private Cell[][] cells;
     private Cell nextCell = null;
+    private boolean isRunning = true;
 
     public ControlSystem(SweepMachine sweepMachine, CellStatus[][] cellStatuses) {
         this.sweepMachine = sweepMachine;
@@ -42,7 +40,7 @@ public class ControlSystem extends Thread {
     public void run() {
         super.run();
         try {
-            while(true) {
+            while(isRunning) {
 
                 // if not able to move, currently it means the sweep machine is full
                 // step 1: direct to charging station, use cellStatuses
@@ -103,26 +101,26 @@ public class ControlSystem extends Thread {
 
                         if(cell == null) {
                             System.out.println("Sweep Machine stopped cleaning...");
-                            this.interrupt();
+                            StationCell baseStation = stationCells.get(0);
+                            ArrayList<Coordinate> path = getShortestPath(currentCell, baseStation, true);
+                            for (int i = 0; i < path.size(); i++) {
+                                Coordinate nextCoordinate = path.get(i);
+                                sweepMachine.makeMovement(cells[nextCoordinate.getY()][nextCoordinate.getX()]);
+                                Thread.sleep(100);
+                            }
+                            sweepMachine.showFinishedCleaningDialog();
+                            stopRunning();
+                        } else {
+                            ArrayList<Coordinate> path = getShortestPath(currentCell, cell, false);
+                            for (int i = 0; i < path.size(); i++) {
+                                Coordinate nextCoordinate = path.get(i);
+                                cellStatuses[nextCoordinate.getY()][nextCoordinate.getX()] = CellStatus.VISITEDFLOORCELL;
+                                sweepMachine.makeMovement(cells[nextCoordinate.getY()][nextCoordinate.getX()]);
+                                Thread.sleep(100);
+                            }
+                            //System.out.println(cell.getCoordinate().toString());
                         }
-
-                        ArrayList<Coordinate> path = getShortestPath(currentCell, cell, false);
-                        for (int i = 0; i < path.size(); i++) {
-                            Coordinate nextCoordinate = path.get(i);
-                            cellStatuses[nextCoordinate.getY()][nextCoordinate.getX()] = CellStatus.VISITEDFLOORCELL;
-                            sweepMachine.makeMovement(cells[nextCoordinate.getY()][nextCoordinate.getX()]);
-                            Thread.sleep(100);
-                        }
-                        //System.out.println(cell.getCoordinate().toString());
                     }
-
-                    // sweepMachine blocked at a corner
-                    // todo: move to the closest unvisited floor cell and start cleaning
-                    // todo: calculate the closest unvisited floor cell by using CellStatus
-                    // todo: get the shortest path to the closest unvisited floor cell
-                    // todo: move the sweep machine through the shortest path to the closest unvisited floor cell
-
-                    //break;
 
                 }
 
@@ -192,6 +190,7 @@ public class ControlSystem extends Thread {
         nextCell = null;    // reset next cell
         Cell[][] cells = sweepMachine.getLayoutCells();
         Queue<Cell> queue = new LinkedList<Cell>();
+        HashSet<Cell> set = new HashSet<Cell>();
         queue.add(cells[currentRow][currentCol]);
         while(!queue.isEmpty()) {
             Cell cell = queue.remove();
@@ -200,19 +199,19 @@ public class ControlSystem extends Thread {
             int row = coordinate.getY();
 
             if(nextCell == null) {
-                checkSurroundingCell(cells, row, col, row-1, col, queue);
+                checkSurroundingCell(cells, row, col, row-1, col, queue, set);
             } else return nextCell;
 
             if(nextCell == null) {
-                checkSurroundingCell(cells, row, col, row, col-1, queue);
+                checkSurroundingCell(cells, row, col, row, col-1, queue, set);
             } else return nextCell;
 
             if(nextCell == null) {
-                checkSurroundingCell(cells, row, col, row+1, col, queue);
+                checkSurroundingCell(cells, row, col, row+1, col, queue, set);
             } else return nextCell;
 
             if(nextCell == null) {
-                checkSurroundingCell(cells, row, col, row, col+1, queue);
+                checkSurroundingCell(cells, row, col, row, col+1, queue, set);
             } else return nextCell;
         }
 
@@ -220,10 +219,13 @@ public class ControlSystem extends Thread {
     }
 
 
-    private void checkSurroundingCell(Cell[][] cells, int curRow, int curCol, int nextRow, int nextCol, Queue<Cell> queue) {
+    private void checkSurroundingCell(Cell[][] cells, int curRow, int curCol, int nextRow, int nextCol, Queue<Cell> queue, HashSet<Cell> set) {
         if(((cells[nextRow][nextCol] instanceof FloorCell) || (cells[nextRow][nextCol] instanceof StationCell) || (cells[nextRow][nextCol] instanceof DoorCell)) &&
                 cellStatuses[nextRow][nextCol].equals(CellStatus.VISITEDFLOORCELL)) {
-            queue.add(cells[nextRow][nextCol]);
+            if(!set.contains(cells[nextRow][nextCol])) {
+                set.add(cells[nextRow][nextCol]);
+                queue.add(cells[nextRow][nextCol]);
+            }
         } else if(((cells[nextRow][nextCol] instanceof FloorCell) || (cells[nextRow][nextCol] instanceof StationCell) || (cells[nextRow][nextCol] instanceof DoorCell)) &&
                 cellStatuses[nextRow][nextCol].equals(CellStatus.UNVISITEDFLOORCELL)) {
             nextCell = cells[nextRow][nextCol];
@@ -283,6 +285,10 @@ public class ControlSystem extends Thread {
                 pathGrid[i][j] = Integer.MAX_VALUE;
             }
         }
+    }
+
+    private void stopRunning() {
+        this.isRunning = false;
     }
 
 

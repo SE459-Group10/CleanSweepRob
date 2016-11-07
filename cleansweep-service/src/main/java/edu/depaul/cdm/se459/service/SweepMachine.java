@@ -154,6 +154,13 @@ public double calculateBatteryReduction(FloorCell currentCell, FloorCell destina
   		RechargeBatteryCapacity();
   		System.out.println("Return to charging station");
   	}
+
+  	public void showFinishedCleaningDialog() {
+		JOptionPane.showMessageDialog(null, "Sweep Machine has finished cleaning");
+		RechargeBatteryCapacity();
+		System.out.println("Returned to charging station");
+	}
+
   //for dirt capacity
 	public boolean capacityFullNotification(){
 		if (dirtCapacity == 0 ) {
