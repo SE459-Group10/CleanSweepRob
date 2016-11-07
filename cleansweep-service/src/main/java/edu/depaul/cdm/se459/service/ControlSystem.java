@@ -23,6 +23,7 @@ public class ControlSystem extends Thread {
     private Cell[][] cells;
     private Cell nextCell = null;
     private boolean isRunning = true;
+    private static final int RUNNING_SPEED = 50;
 
     public ControlSystem(SweepMachine sweepMachine, CellStatus[][] cellStatuses) {
         this.sweepMachine = sweepMachine;
@@ -60,7 +61,7 @@ public class ControlSystem extends Thread {
                         for (int i = 0; i < path.size(); i++) {
                             Coordinate nextCoordinate = path.get(i);
                             sweepMachine.makeMovement(cells[nextCoordinate.getY()][nextCoordinate.getX()]);
-                            Thread.sleep(100);
+                            Thread.sleep(RUNNING_SPEED);
                         }
                         // show empty me message
                         sweepMachine.showEmptyMeDialog();
@@ -69,7 +70,7 @@ public class ControlSystem extends Thread {
                         for (int i = path.size() - 1; i >= 0; i--) {
                             Coordinate nextCoordinate = path.get(i);
                             sweepMachine.makeMovement(cells[nextCoordinate.getY()][nextCoordinate.getX()]);
-                            Thread.sleep(100);
+                            Thread.sleep(RUNNING_SPEED);
                         }
                     }
                     else if(sweepMachine.getBatteryLevel() < 3.0)
@@ -81,7 +82,7 @@ public class ControlSystem extends Thread {
                         for (int i = 0; i < path.size(); i++) {
                             Coordinate nextCoordinate = path.get(i);
                             sweepMachine.makeMovement(cells[nextCoordinate.getY()][nextCoordinate.getX()]);
-                            Thread.sleep(100);
+                            Thread.sleep(RUNNING_SPEED);
                         }
                         // show empty me message
                         sweepMachine.showRechargeDialog();
@@ -90,7 +91,7 @@ public class ControlSystem extends Thread {
                         for (int i = path.size() - 1; i >= 0; i--) {
                             Coordinate nextCoordinate = path.get(i);
                             sweepMachine.makeMovement(cells[nextCoordinate.getY()][nextCoordinate.getX()]);
-                            Thread.sleep(100);
+                            Thread.sleep(RUNNING_SPEED);
                         }
                     }
                     else {
@@ -106,7 +107,7 @@ public class ControlSystem extends Thread {
                             for (int i = 0; i < path.size(); i++) {
                                 Coordinate nextCoordinate = path.get(i);
                                 sweepMachine.makeMovement(cells[nextCoordinate.getY()][nextCoordinate.getX()]);
-                                Thread.sleep(100);
+                                Thread.sleep(RUNNING_SPEED);
                             }
                             sweepMachine.showFinishedCleaningDialog();
                             stopRunning();
@@ -116,7 +117,7 @@ public class ControlSystem extends Thread {
                                 Coordinate nextCoordinate = path.get(i);
                                 cellStatuses[nextCoordinate.getY()][nextCoordinate.getX()] = CellStatus.VISITEDFLOORCELL;
                                 sweepMachine.makeMovement(cells[nextCoordinate.getY()][nextCoordinate.getX()]);
-                                Thread.sleep(100);
+                                Thread.sleep(RUNNING_SPEED);
                             }
                             //System.out.println(cell.getCoordinate().toString());
                         }
@@ -124,7 +125,7 @@ public class ControlSystem extends Thread {
 
                 }
 
-                Thread.sleep(100);
+                Thread.sleep(RUNNING_SPEED);
             }
         } catch (InterruptedException e) {
             e.printStackTrace();

@@ -6,9 +6,12 @@ import edu.depaul.cdm.se459.model.Utility;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -32,6 +35,9 @@ public class MainFrame extends JFrame {
     private Cell[][] cells;
     private CellStatus[][] cellStatuses;
     private StationCell startStationCell;
+    private JButton startBtn;
+    private JButton stopBtn;
+    private ArrayList<FloorCell> floorCells = new ArrayList<FloorCell>();
 
     public MainFrame(File file) throws IOException {
         super(APP_NAME);
@@ -107,11 +113,13 @@ public class MainFrame extends JFrame {
                                 break;
                             default:
                                 FloorCell floorCell = new FloorCell(new Coordinate(i, j), num);
-                                Random generator = new Random();
-                                int randomDirtAmount = generator.nextInt(5);          // give a random dirt amount from 0 to 4
-                                floorCell.setDirtAmount(randomDirtAmount);
-                                
-                                floorCell.setText(randomDirtAmount+"");
+                                floorCells.add(floorCell);
+
+//                                Random generator = new Random();
+//                                int randomDirtAmount = generator.nextInt(5);          // give a random dirt amount from 0 to 4
+//                                floorCell.setDirtAmount(randomDirtAmount);
+//
+//                                floorCell.setText(randomDirtAmount+"");
                                 cells[i][j] = floorCell;
                                 cellStatuses[i][j] = UNVISITEDFLOORCELL;
                                 panel.add(floorCell);
@@ -126,11 +134,31 @@ public class MainFrame extends JFrame {
 
             // add info panel about views
             addInfoPanel();
+            addControlBtnPanel();
         } catch (IOException e) {
             throw e;
         } finally {
             if(s != null) {
                 s.close();
+            }
+        }
+    }
+
+    public void resetDirtToFloor() {
+        for(FloorCell floorCell: floorCells) {
+            Random generator = new Random();
+            int randomDirtAmount = generator.nextInt(5);          // give a random dirt amount from 0 to 4
+            floorCell.setDirtAmount(randomDirtAmount);
+
+            floorCell.setText(randomDirtAmount+"");
+            floorCell.setVisited(false);
+            floorCell.updateUI();
+        }
+        for(int i = 0; i < cellStatuses.length; i++) {
+            for(int j = 0; j < cellStatuses[0].length; j++) {
+                if(cellStatuses[i][j] == VISITEDFLOORCELL) {
+                    cellStatuses[i][j] = UNVISITEDFLOORCELL;
+                }
             }
         }
     }
@@ -163,9 +191,23 @@ public class MainFrame extends JFrame {
         this.startStationCell = startStationCell;
     }
 
+    private void addControlBtnPanel() {
+        JPanel panel = new JPanel();
+        panel.setLayout(new GridLayout(0, 2));
+
+        startBtn = new JButton("Start");
+        stopBtn = new JButton("Reset Dirt");
+
+        panel.add(startBtn);
+        panel.add(stopBtn);
+
+        add(panel, BorderLayout.NORTH);
+    }
+
+
     private void addInfoPanel() {
         JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(0, 8));
+        panel.setLayout(new GridLayout(0, 9));
 
         JLabel label = new JLabel("Sweep Machine");
         label.setHorizontalAlignment(SwingConstants.CENTER);
@@ -218,6 +260,14 @@ public class MainFrame extends JFrame {
         panel.add(chargingStationLabel);
 
         add(panel, BorderLayout.SOUTH);
+    }
+
+    public JButton getStartBtn() {
+        return startBtn;
+    }
+
+    public JButton getStopBtn() {
+        return stopBtn;
     }
 
 }
