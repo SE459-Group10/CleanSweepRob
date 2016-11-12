@@ -23,7 +23,7 @@ public class ControlSystem extends Thread {
     private Cell[][] cells;
     private Cell nextCell = null;
     private boolean isRunning = true;
-    private static final int RUNNING_SPEED = 50;
+    private static final int RUNNING_SPEED = 100;
 
     public ControlSystem(SweepMachine sweepMachine, CellStatus[][] cellStatuses) {
         this.sweepMachine = sweepMachine;
@@ -102,7 +102,7 @@ public class ControlSystem extends Thread {
 
                         if(cell == null) {
                             System.out.println("Sweep Machine stopped cleaning...");
-                            StationCell baseStation = stationCells.get(0);
+                    StationCell baseStation = stationCells.get(0);
                             ArrayList<Coordinate> path = getShortestPath(currentCell, baseStation, true);
                             for (int i = 0; i < path.size(); i++) {
                                 Coordinate nextCoordinate = path.get(i);
